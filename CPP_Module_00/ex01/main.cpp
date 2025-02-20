@@ -1,25 +1,31 @@
 #include "include/PhoneBook.hpp"
 #include <string>
+#include <iostream>
+#include <cstdlib>
 
-void handle_input(std::string input)
+void handle_input(PhoneBook &phonebook, std::string input)
 {
     if (input == "ADD")
     {
-        std::cout << "If ADD, then set information" << std::endl;
+        phonebook.searchContact();
     }
     else if (input == "SEARCH")
     {
-        std::cout << "if SEARCH, then get information" << std::endl;
+        phonebook.searchContact();
     }
     else if (input == "EXIT")
     {
-        std::cout << "If EXIT, then delete contacts and quit" << std::endl;
+        std::cout << "\nExiting..." << std::endl;
+        exit(0);
     }
     else
     {
-        std::cout << "Invalid command" << std::endl;
+        //std::cout << "Invalid command.\nTRY AGAIN!!" << std::endl;
+        return;
     }
 }
+
+//handle control + C
 
 int main()
 {
@@ -29,6 +35,13 @@ int main()
     phonebook.show_info();
     while (true && std::getline(std::cin, input))
     {
+        // what for EOF - end of file - ctrl + D
+        if (std::cin.eof() == true)
+        {
+            std::cout << "Ctrl + D -> Exiting..." << std::endl;
+            exit(0);
+        }
+        handle_input(phonebook, input);
     }
     return 0;
 }
