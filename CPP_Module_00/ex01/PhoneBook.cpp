@@ -122,9 +122,11 @@ void PhoneBook::addContact(void) {
         for (int i = 0; i < 5; i++) {
             clearContactLast(i);
         }
+        this->index = 7;
         for (int i = 0; i < 5; i++) {
             addContactInfo(i);
         }
+        this->index++;
         std::cout << "Contact added." << std::endl;
     }
     else if (this->index < 8) {
