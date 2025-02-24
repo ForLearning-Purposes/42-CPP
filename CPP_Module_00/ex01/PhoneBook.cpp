@@ -1,6 +1,7 @@
 #include "include/PhoneBook.hpp"
 #include <iostream>
 #include <string>
+#include <cstdlib>
 
 /*
 CLASS DEFINITION:
@@ -40,13 +41,99 @@ PhoneBook::~PhoneBook(void) {
 }
 
 void PhoneBook::show_info(void) {
-    std::cout << "\tEnter command (ADD, SEARCH, EXIT):" << std::endl;
+
+    std::cout << "\033[1;34m";
+    std::cout << "\n\tInfo:" << std::endl;
+    std::cout << "\tADD -> to add a new contact" << std::endl;
+    std::cout << "\tSEARCH -> to search for a contact" << std::endl;
+    std::cout << "\tEXIT -> to exit the program" << std::endl;
+    std::cout << "\033[0m";
+
+    std::cout << "\n\tENTER COMMAND:" << std::endl;
+}
+
+bool PhoneBook::addContactInfo(int i) {
+    std::string input;
+    // input can't be empty
+    if (std::cin.eof() == true) {
+        std::cout << "Ctrl + D -> Exiting..." << std::endl;
+        exit(0);
+    }
+    switch (i) {
+        case 0:
+            std::cout << "Enter first name:" << std::endl;
+            std::cin >> input;
+            //handle input for first and last name
+            contacts[this->index].setFirstName(input);
+            break;
+        case 1:
+            std::cout << "Enter last name:" << std::endl;
+            std::cin >> input;
+            //handle input for first and last name
+            contacts[this->index].setLastName(input);
+            break;
+        case 2:
+            std::cout << "Enter nickname:" << std::endl;
+            std::cin >> input;
+            //handle input for nickname
+            contacts[this->index].setNickname(input);
+            break;
+        case 3:
+            std::cout << "Enter phone number:" << std::endl;
+            std::cin >> input;
+            //handle input for phone number
+            contacts[this->index].setPhoneNumber(input);
+            break;
+        case 4:
+            std::cout << "Enter darkest secret:" << std::endl;
+            std::cin >> input;
+            //handle input for darkest secret
+            contacts[this->index].setDarkestSecret(input);
+    }
+    return true;
+}
+
+void PhoneBook::clearContactLast(int i) {
+    switch (i) {
+        case 0:
+            contacts[7].setFirstName("");
+            break;
+        case 1:
+            contacts[7].setLastName("");
+            break;
+        case 2:
+            contacts[7].setNickname("");
+            break;
+        case 3:
+            contacts[7].setPhoneNumber("");
+            break;
+        case 4:
+            contacts[7].setDarkestSecret("");
+    }
 }
 
 void PhoneBook::addContact(void) {
-    std::cout << "**ADD**" << std::endl;
-    std::cout << this->index << std::endl;
-
+    std::string input;
+    std::cout << "**ADDING CONTACT**" << std::endl;
+    std::cout << "\nContact no. #" << this->index << std::endl;
+    // == 8 because it starts from 0 and when it reaches 8, it's full and already added 8 contacts
+    if (this->index == 8) {
+        std::cout << "PhoneBook is full.\nBy adding a new conntact you will delete last contact added" << std::endl;
+        for (int i = 0; i < 5; i++) {
+            clearContactLast(i);
+        }
+        for (int i = 0; i < 5; i++) {
+            addContactInfo(i);
+        }
+        std::cout << "Contact added." << std::endl;
+    }
+    else if (this->index < 8) {
+        for (int i = 0; i < 5; i++) {
+            addContactInfo(i);
+        }
+        std::cout << "Contact added." << std::endl;
+        this->index++;
+    }
 }
 
 void PhoneBook::searchContact(void) {

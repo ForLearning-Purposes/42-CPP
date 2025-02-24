@@ -25,6 +25,16 @@ class Contact {
         int random;
         Contact(); // Constructor -> A constructor is a special type of member function that initializes an object automatically when it is created.
         ~Contact(); // Destructor -> A destructor is a special member function that is called when the scope of an object ends.
+        std::string getFirstName();
+        std::string getLastName();
+        std::string getNickname();
+        std::string getPhoneNumber();
+        std::string getDarkestSecret();
+        void setFirstName(std::string first_name);
+        void setLastName(std::string last_name);
+        void setNickname(std::string nickname);
+        void setPhoneNumber(std::string phone_number);
+        void setDarkestSecret(std::string darkest_secret);
     private:
         // Private are variables and functions that can only be accessed by the class they belong
         std::string first_name;

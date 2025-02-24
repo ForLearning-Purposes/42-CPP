@@ -7,7 +7,7 @@ void handle_input(PhoneBook &phonebook, std::string input)
 {
     if (input == "ADD")
     {
-        phonebook.searchContact();
+        phonebook.addContact();
     }
     else if (input == "SEARCH")
     {
@@ -18,11 +18,6 @@ void handle_input(PhoneBook &phonebook, std::string input)
         std::cout << "\nExiting..." << std::endl;
         exit(0);
     }
-    else
-    {
-        //std::cout << "Invalid command.\nTRY AGAIN!!" << std::endl;
-        return;
-    }
 }
 
 //handle control + C
@@ -30,18 +25,19 @@ void handle_input(PhoneBook &phonebook, std::string input)
 int main()
 {
     PhoneBook phonebook;
-    std::string input;
 
     phonebook.show_info();
-    while (true && std::getline(std::cin, input))
+    while (!std::cin.fail())
     {
-        // what for EOF - end of file - ctrl + D
-        if (std::cin.eof() == true)
+        std::string input;
+        std::cin >> input;
+        if (std::cin.fail() == true || std::cin.eof() == true)
         {
-            std::cout << "Ctrl + D -> Exiting..." << std::endl;
+            std::cout << "Exiting..." << std::endl;
             exit(0);
         }
         handle_input(phonebook, input);
+        phonebook.show_info();
     }
     return 0;
 }
