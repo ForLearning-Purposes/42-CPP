@@ -22,7 +22,6 @@ Purpose of the Contact class:
 class Contact {
     public:
         // Public are variables and functions that can be accessed by other classes or functions.
-        int random;
         Contact(); // Constructor -> A constructor is a special type of member function that initializes an object automatically when it is created.
         ~Contact(); // Destructor -> A destructor is a special member function that is called when the scope of an object ends.
         std::string getFirstName();

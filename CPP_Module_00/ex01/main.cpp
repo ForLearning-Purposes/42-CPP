@@ -30,7 +30,7 @@ int main()
     while (!std::cin.fail())
     {
         std::string input;
-        std::cin >> input;
+        std::getline(std::cin, input);
         if (std::cin.fail() == true || std::cin.eof() == true)
         {
             std::cout << "Exiting..." << std::endl;

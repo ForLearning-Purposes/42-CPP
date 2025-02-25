@@ -5,11 +5,11 @@
 
 // Constructor
 Contact::Contact(void) {
-    this->first_name = "Monika";
-    this->last_name = "Simic";
-    this->nickname = "mona";
-    this->phone_number = "05533441";
-    this->darkest_secret = "None";
+    this->first_name = "";
+    this->last_name = "";
+    this->nickname = "";
+    this->phone_number = "";
+    this->darkest_secret = "";
 }
 
 Contact::~Contact(void) {

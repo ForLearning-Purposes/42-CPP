@@ -15,6 +15,7 @@ class PhoneBook {
         void searchContact(void);
         bool addContactInfo(int i);
         void clearContactLast(int i);
+        void show_contact(int index_of_the_contact);
     private:
         // Private are variables and functions that can only be accessed by the class they belong
         Contact contacts[8]; // this is an array of 8 contacts. Each contact has a first name, last name, nickname, phone number, and darkest secret.

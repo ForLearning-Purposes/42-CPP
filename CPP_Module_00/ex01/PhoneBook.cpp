@@ -1,7 +1,10 @@
 #include "include/PhoneBook.hpp"
+#include "include/inputHandling.hpp"
 #include <iostream>
+#include <sstream>
 #include <string>
 #include <cstdlib>
+#include <cctype>
 
 /*
 CLASS DEFINITION:
@@ -53,8 +56,8 @@ void PhoneBook::show_info(void) {
 }
 
 bool PhoneBook::addContactInfo(int i) {
+    inputHandling inputHandling;
     std::string input;
-    // input can't be empty
     if (std::cin.eof() == true) {
         std::cout << "Ctrl + D -> Exiting..." << std::endl;
         exit(0);
@@ -62,33 +65,48 @@ bool PhoneBook::addContactInfo(int i) {
     switch (i) {
         case 0:
             std::cout << "Enter first name:" << std::endl;
-            std::cin >> input;
-            //handle input for first and last name
+            std::getline(std::cin, input);
+            if (inputHandling.ifInputEmptyAndNoCharacter(input, "First name") == false){
+                return false;
+            }
             contacts[this->index].setFirstName(input);
+            input.clear();
             break;
         case 1:
             std::cout << "Enter last name:" << std::endl;
-            std::cin >> input;
-            //handle input for first and last name
+            std::getline(std::cin, input);
+            if (inputHandling.ifInputEmptyAndNoCharacter(input, "Last name") == false){
+                return false;
+            }
             contacts[this->index].setLastName(input);
+            input.clear();
             break;
         case 2:
             std::cout << "Enter nickname:" << std::endl;
-            std::cin >> input;
-            //handle input for nickname
+            std::getline(std::cin, input);
+            if (inputHandling.ifInputEmptyAndNoCharacter(input, "Nickname") == false){
+                return false;
+            }
             contacts[this->index].setNickname(input);
+            input.clear();
             break;
         case 3:
             std::cout << "Enter phone number:" << std::endl;
-            std::cin >> input;
-            //handle input for phone number
+            std::getline(std::cin, input);
+            if (inputHandling.ifInputEmptyAndNoCharacter(input, "Phone number") == false){
+                return false;
+            }
+            else if (inputHandling.isPhoneNumberDigit(input, "Phone number") == false){
+                return false;
+            }
             contacts[this->index].setPhoneNumber(input);
+            input.clear();
             break;
         case 4:
             std::cout << "Enter darkest secret:" << std::endl;
-            std::cin >> input;
-            //handle input for darkest secret
+            std::getline(std::cin, input);
             contacts[this->index].setDarkestSecret(input);
+            input.clear();
     }
     return true;
 }
@@ -124,14 +142,18 @@ void PhoneBook::addContact(void) {
         }
         this->index = 7;
         for (int i = 0; i < 5; i++) {
-            addContactInfo(i);
+            if (addContactInfo(i) == false){
+                i -= 1;
+            }
         }
         this->index++;
         std::cout << "Contact added." << std::endl;
     }
     else if (this->index < 8) {
         for (int i = 0; i < 5; i++) {
-            addContactInfo(i);
+            if (addContactInfo(i) == false){
+                i -= 1;
+            }
         }
         std::cout << "Contact added." << std::endl;
         this->index++;
@@ -139,19 +161,52 @@ void PhoneBook::addContact(void) {
 }
 
 void PhoneBook::searchContact(void) {
+    inputHandling inputHandling;
     std::string input;
 
+    std::cout << "Enter index of the contact:" << std::endl;
     std::getline(std::cin, input);
-
-    if (this->index == 0) {
-        std::cout << "PhoneBook is empty." << std::endl;
+    if (inputHandling.isIndexDigit(input, "Index") == false){
+        return;
     }
-    else if (this->index > 0) {
+    else if (this->index == 0) {
+        std::cout << "\033[1;91m";
+        std::cout << "\nPhoneBook is empty.\nPlease add conntact first." << std::endl;
+        std::cout << "\033[0m";
+    }
+    else if (this->index > 0 && this->index <= 8) {
         std::cout << "PhoneBook is not empty." << std::endl;
         if (std::cin.eof() == true) {
             std::cout << "Ctrl + D -> Exiting..." << std::endl;
             exit(0);
         }
-        // first:
+        int index_num;
+        std::stringstream ss(input);
+        ss >> index_num;
+        if (ss.fail() == true) {
+            std::cout << "\033[1;91m";
+            std::cout << "ERROR:\nConversion failed.\n" << std::endl;
+            std::cout << "\033[0m";
+            return;
+        }
+        else if (index_num >= this->index) {
+            std::cout << "\033[1;91m";
+            std::cout << "\nERROR:\nIndex is out of range.\n" << std::endl;
+            std::cout << "\033[0m";
+            return;
+        }
+        show_contact(index_num);
     }
+}
+
+void PhoneBook::show_contact(int index_of_the_contact) {
+    std::cout << "\033[1;32m";
+    std::cout << "\n\n****************PHONEBOOK****************" << std::endl;
+    std::cout << "\n\n+ INDEX: " << index_of_the_contact << std::endl;
+    std::cout << "FIRST NAME: " << contacts[index_of_the_contact].getFirstName() << std::endl;
+    std::cout << "LAST NAME: " << contacts[index_of_the_contact].getLastName() << std::endl;
+    std::cout << "NICKNAME: " << contacts[index_of_the_contact].getNickname() << std::endl;
+    std::cout << "PHONE NUMBER: " << contacts[index_of_the_contact].getPhoneNumber() << std::endl;
+    std::cout << "DARKEST SECRET: " << contacts[index_of_the_contact].getDarkestSecret() << std::endl;
+    std::cout << "\033[0m";
 }

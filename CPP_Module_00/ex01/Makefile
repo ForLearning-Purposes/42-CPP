@@ -1,7 +1,7 @@
 # Makefile
 
 # Specific variables
-SRCS = main.cpp PhoneBook.cpp Contact.cpp
+SRCS = main.cpp PhoneBook.cpp Contact.cpp utils/inputHandling.cpp
 OBJS = $(SRCS:.cpp=.o)
 TARGET = PhoneBook
 
