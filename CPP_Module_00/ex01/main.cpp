@@ -22,22 +22,28 @@ void handle_input(PhoneBook &phonebook, std::string input)
 
 //handle control + C
 
-int main()
+int main(int ac, char **av)
 {
+    (void)av;
     PhoneBook phonebook;
 
-    phonebook.show_info();
-    while (!std::cin.fail())
-    {
-        std::string input;
-        std::getline(std::cin, input);
-        if (std::cin.fail() == true || std::cin.eof() == true)
-        {
-            std::cout << "Exiting..." << std::endl;
-            exit(0);
-        }
-        handle_input(phonebook, input);
+    if (ac == 1){
         phonebook.show_info();
+        while (!std::cin.fail())
+        {
+            std::string input;
+            std::getline(std::cin, input);
+            if (std::cin.fail() == true || std::cin.eof() == true)
+            {
+                std::cout << "Exiting..." << std::endl;
+                exit(0);
+            }
+            handle_input(phonebook, input);
+            phonebook.show_info();
+        }
+    }
+    else {
+        std::cout << "Usage: ./phonebook" << std::endl;
     }
     return 0;
 }

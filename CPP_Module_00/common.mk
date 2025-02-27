@@ -3,6 +3,8 @@
 # Variables
 CXX = g++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
+OBJDIR = bin
+OBJS = $(patsubst %.cpp,$(OBJDIR)/%.o,$(SRCS))
 
 # Rules
 all: $(TARGET)
@@ -10,11 +12,13 @@ all: $(TARGET)
 $(TARGET): $(OBJS)
 	$(CXX) $(CXXFLAGS) -o $(TARGET) $(OBJS)
 
-%.o: %.cpp
+$(OBJDIR)/%.o: %.cpp
+	@mkdir -p $(dir $@)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:
 	rm -f $(OBJS)
+	rm -rf $(OBJDIR)
 
 fclean: clean
 	rm -f $(TARGET)

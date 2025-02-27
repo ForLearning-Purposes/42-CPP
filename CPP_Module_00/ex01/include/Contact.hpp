@@ -43,4 +43,6 @@ class Contact {
         std::string darkest_secret;
 };
 
+//    \033[1;32m
+//    \033[0m
 #endif

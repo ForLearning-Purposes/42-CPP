@@ -34,13 +34,13 @@ EXAMPLE:
 // Constructor
 // adter : random_variable(0) is an initialization list and if we initialize one more variable, we separate them with a comma.
 PhoneBook::PhoneBook(void) : index(0) {
-    std::cout << "***PhoneBook constructor called in PhoneBook.cpp***" << std::endl;
-    std::cout << "- Constructor is a special type of member function that initializes an object automatically when it is created.\n" << std::endl;
+    //std::cout << "***PhoneBook constructor called in PhoneBook.cpp***" << std::endl;
+    //std::cout << "- Constructor is a special type of member function that initializes an object automatically when it is created.\n" << std::endl;
 }
 
 PhoneBook::~PhoneBook(void) {
-    std::cout << "\n\n***PhoneBook destructor called in PhoneBook.cpp***" << std::endl;
-    std::cout << "- Destructor is a special member function that is called when the scope of an object ends." << std::endl;
+    // std::cout << "\n\n***PhoneBook destructor called in PhoneBook.cpp***" << std::endl;
+    // std::cout << "- Destructor is a special member function that is called when the scope of an object ends." << std::endl;
 }
 
 void PhoneBook::show_info(void) {
@@ -202,11 +202,12 @@ void PhoneBook::searchContact(void) {
 void PhoneBook::show_contact(int index_of_the_contact) {
     std::cout << "\033[1;32m";
     std::cout << "\n\n****************PHONEBOOK****************" << std::endl;
-    std::cout << "\n\n+ INDEX: " << index_of_the_contact << std::endl;
-    std::cout << "FIRST NAME: " << contacts[index_of_the_contact].getFirstName() << std::endl;
-    std::cout << "LAST NAME: " << contacts[index_of_the_contact].getLastName() << std::endl;
-    std::cout << "NICKNAME: " << contacts[index_of_the_contact].getNickname() << std::endl;
-    std::cout << "PHONE NUMBER: " << contacts[index_of_the_contact].getPhoneNumber() << std::endl;
-    std::cout << "DARKEST SECRET: " << contacts[index_of_the_contact].getDarkestSecret() << std::endl;
+    std::cout << "\nINDEX: " << "\n-> " << index_of_the_contact << std::endl;
+    std::cout << "FIRST NAME: " << "\n-> " << contacts[index_of_the_contact].getFirstName() << std::endl;
+    std::cout << "LAST NAME: " << "\n-> " << contacts[index_of_the_contact].getLastName() << std::endl;
+    std::cout << "NICKNAME: " << "\n-> " << contacts[index_of_the_contact].getNickname() << std::endl;
+    std::cout << "PHONE NUMBER: " << "\n-> " << contacts[index_of_the_contact].getPhoneNumber() << std::endl;
+    std::cout << "DARKEST SECRET: " << "\n-> " << contacts[index_of_the_contact].getDarkestSecret() << std::endl;
+    std::cout << "\n*****************************************" << std::endl;
     std::cout << "\033[0m";
 }
