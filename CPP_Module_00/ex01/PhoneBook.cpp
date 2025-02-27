@@ -132,12 +132,11 @@ void PhoneBook::clearContactLast(int i, int index_to_rm) {
 
 void PhoneBook::addContact(int intex_count) {
     std::string input;
-    std::cout << "Index in addContact: " << intex_count << std::endl;
     std::cout << "**ADDING CONTACT**" << std::endl;
     std::cout << "\nContact no. #" << this->index << std::endl;
     // == 8 because it starts from 0 and when it reaches 8, it's full and already added 8 contacts
     if (this->index == 8) {
-        std::cout << "PhoneBook is full.\nBy adding a new conntact you will delete last contact added" << std::endl;
+        std::cout << "PhoneBook is full.\nBy adding a new conntact you replace the oldest one by the new one added" << std::endl;
         for (int i = 0; i < 5; i++) {
             clearContactLast(i, intex_count);
         }
@@ -159,9 +158,12 @@ void PhoneBook::addContact(int intex_count) {
     }
 }
 
-void PhoneBook::searchContact(void) {
+void PhoneBook::searchContact() {
     inputHandling inputHandling;
     std::string input;
+
+    if (this->index > 0)
+        show_contacts();
 
     std::cout << "Enter index of the contact:" << std::endl;
     std::getline(std::cin, input);
@@ -174,7 +176,6 @@ void PhoneBook::searchContact(void) {
         std::cout << "\033[0m";
     }
     else if (this->index > 0 && this->index <= 8) {
-        std::cout << "PhoneBook is not empty." << std::endl;
         if (std::cin.eof() == true) {
             std::cout << "Ctrl + D -> Exiting..." << std::endl;
             exit(0);
@@ -195,6 +196,38 @@ void PhoneBook::searchContact(void) {
             return;
         }
         show_contact(index_num);
+    }
+}
+
+void PhoneBook::show_contacts(void){
+    std::cout << "\033[1;32m";
+    std::cout << "\n\n****************PHONEBOOK****************" << std::endl;
+    std::cout << "|    INDEX" << "|   F_NAME" << "|   L_NAME" << "| NICKNAME|" << std::endl;
+    for (int i = 0; i < this->index; i++)
+    {
+        std::cout << "--------------------------------------------" << std::endl;
+        std::cout << "|";
+        std::cout << "        " << i;
+        std::cout << "|";
+        int len = contacts[i].getFirstName().length();
+        if (len > 10)
+            std::cout << contacts[i].getFirstName().substr(0, 9) << ".";
+        else
+            std::cout << std::string(10 - len, ' ') << contacts[i].getFirstName();
+        std::cout << "|";
+        len = contacts[i].getLastName().length();
+        if (len > 10)
+            std::cout << contacts[i].getLastName().substr(0, 9) << ".";
+        else
+            std::cout << std::string(10 - len, ' ') << contacts[i].getLastName();
+        std::cout << "|";
+        len = contacts[i].getNickname().length();
+        if (len > 10)
+            std::cout << contacts[i].getNickname().substr(0, 9) << ".";
+        else
+            std::cout << std::string(10 - len, ' ') << contacts[i].getNickname();
+        std::cout << "|";
+        std::cout << std::endl;
     }
 }
 

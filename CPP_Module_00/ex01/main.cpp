@@ -7,7 +7,6 @@ void handle_input(PhoneBook &phonebook, std::string input, int &i)
 {
     if (input == "ADD")
     {
-        std::cout << "Index in handle_input: " << i << std::endl;
         phonebook.addContact(i);
         i += 1;
         if (i == 8)
