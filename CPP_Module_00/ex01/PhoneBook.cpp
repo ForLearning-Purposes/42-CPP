@@ -55,7 +55,7 @@ void PhoneBook::show_info(void) {
     std::cout << "\n\tENTER COMMAND:" << std::endl;
 }
 
-bool PhoneBook::addContactInfo(int i) {
+bool PhoneBook::addContactInfo(int i, int index_to_replace) {
     inputHandling inputHandling;
     std::string input;
     if (std::cin.eof() == true) {
@@ -69,7 +69,7 @@ bool PhoneBook::addContactInfo(int i) {
             if (inputHandling.ifInputEmptyAndNoCharacter(input, "First name") == false){
                 return false;
             }
-            contacts[this->index].setFirstName(input);
+            contacts[index_to_replace].setFirstName(input);
             input.clear();
             break;
         case 1:
@@ -78,7 +78,7 @@ bool PhoneBook::addContactInfo(int i) {
             if (inputHandling.ifInputEmptyAndNoCharacter(input, "Last name") == false){
                 return false;
             }
-            contacts[this->index].setLastName(input);
+            contacts[index_to_replace].setLastName(input);
             input.clear();
             break;
         case 2:
@@ -87,7 +87,7 @@ bool PhoneBook::addContactInfo(int i) {
             if (inputHandling.ifInputEmptyAndNoCharacter(input, "Nickname") == false){
                 return false;
             }
-            contacts[this->index].setNickname(input);
+            contacts[index_to_replace].setNickname(input);
             input.clear();
             break;
         case 3:
@@ -99,59 +99,58 @@ bool PhoneBook::addContactInfo(int i) {
             else if (inputHandling.isPhoneNumberDigit(input, "Phone number") == false){
                 return false;
             }
-            contacts[this->index].setPhoneNumber(input);
+            contacts[index_to_replace].setPhoneNumber(input);
             input.clear();
             break;
         case 4:
             std::cout << "Enter darkest secret:" << std::endl;
             std::getline(std::cin, input);
-            contacts[this->index].setDarkestSecret(input);
+            contacts[index_to_replace].setDarkestSecret(input);
             input.clear();
     }
     return true;
 }
 
-void PhoneBook::clearContactLast(int i) {
+void PhoneBook::clearContactLast(int i, int index_to_rm) {
     switch (i) {
         case 0:
-            contacts[7].setFirstName("");
+            contacts[index_to_rm].setFirstName("");
             break;
         case 1:
-            contacts[7].setLastName("");
+            contacts[index_to_rm].setLastName("");
             break;
         case 2:
-            contacts[7].setNickname("");
+            contacts[index_to_rm].setNickname("");
             break;
         case 3:
-            contacts[7].setPhoneNumber("");
+            contacts[index_to_rm].setPhoneNumber("");
             break;
         case 4:
-            contacts[7].setDarkestSecret("");
+            contacts[index_to_rm].setDarkestSecret("");
     }
 }
 
-void PhoneBook::addContact(void) {
+void PhoneBook::addContact(int intex_count) {
     std::string input;
+    std::cout << "Index in addContact: " << intex_count << std::endl;
     std::cout << "**ADDING CONTACT**" << std::endl;
     std::cout << "\nContact no. #" << this->index << std::endl;
     // == 8 because it starts from 0 and when it reaches 8, it's full and already added 8 contacts
     if (this->index == 8) {
         std::cout << "PhoneBook is full.\nBy adding a new conntact you will delete last contact added" << std::endl;
         for (int i = 0; i < 5; i++) {
-            clearContactLast(i);
+            clearContactLast(i, intex_count);
         }
-        this->index = 7;
         for (int i = 0; i < 5; i++) {
-            if (addContactInfo(i) == false){
+            if (addContactInfo(i, intex_count) == false){
                 i -= 1;
             }
         }
-        this->index++;
         std::cout << "Contact added." << std::endl;
     }
     else if (this->index < 8) {
         for (int i = 0; i < 5; i++) {
-            if (addContactInfo(i) == false){
+            if (addContactInfo(i, intex_count) == false){
                 i -= 1;
             }
         }

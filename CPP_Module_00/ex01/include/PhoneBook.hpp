@@ -11,10 +11,10 @@ class PhoneBook {
         PhoneBook(); // Constructor -> A constructor is a special type of member function that initializes an object automatically when it is created.
         ~PhoneBook(); // Destructor -> A destructor is a special member function that is called when the scope of an object ends.
         void show_info(void);
-        void addContact(void);
+        void addContact(int intex_count);
         void searchContact(void);
-        bool addContactInfo(int i);
-        void clearContactLast(int i);
+        bool addContactInfo(int i, int index_to_replace);
+        void clearContactLast(int i, int index_to_rm);
         void show_contact(int index_of_the_contact);
     private:
         // Private are variables and functions that can only be accessed by the class they belong

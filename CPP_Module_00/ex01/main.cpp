@@ -3,14 +3,14 @@
 #include <iostream>
 #include <cstdlib>
 
-void handle_input(PhoneBook &phonebook, std::string input)
+void handle_input(PhoneBook &phonebook, std::string input, int &i)
 {
-    int i = 0;
     if (input == "ADD")
     {
-        phonebook.addContact();
-        i++;
-        if (i == 7)
+        std::cout << "Index in handle_input: " << i << std::endl;
+        phonebook.addContact(i);
+        i += 1;
+        if (i == 8)
             i = 0;
     }
     else if (input == "SEARCH")
@@ -30,6 +30,7 @@ int main(int ac, char **av)
 {
     (void)av;
     PhoneBook phonebook;
+    int i = 0;
 
     if (ac == 1){
         phonebook.show_info();
@@ -42,7 +43,7 @@ int main(int ac, char **av)
                 std::cout << "Exiting..." << std::endl;
                 exit(0);
             }
-            handle_input(phonebook, input);
+            handle_input(phonebook, input, i);
             phonebook.show_info();
         }
     }
