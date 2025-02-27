@@ -5,9 +5,13 @@
 
 void handle_input(PhoneBook &phonebook, std::string input)
 {
+    int i = 0;
     if (input == "ADD")
     {
         phonebook.addContact();
+        i++;
+        if (i == 7)
+            i = 0;
     }
     else if (input == "SEARCH")
     {
