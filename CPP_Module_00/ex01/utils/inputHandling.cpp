@@ -19,6 +19,13 @@ bool inputHandling::ifInputEmptyAndNoCharacter(std::string input, std::string me
         std::cout << "\033[0m";
         return false;
     }
+    else if (input.length() >= 20) //longer then 20 characters
+    {
+        std::cout << "\033[1;91m";
+        std::cout << "\nERROR:\n" << message << " must have less than 20 characters.\n" << std::endl;
+        std::cout << "\033[0m";
+        return false;
+    }
     return true;
 }
 
