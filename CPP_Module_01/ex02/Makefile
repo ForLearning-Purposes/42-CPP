@@ -1,8 +1,8 @@
 # Makefile
 
 # Specific variables
-SRCS = 
-TARGET = 
+SRCS = main.cpp
+TARGET = Brain
 
 # Include common rules and variables
 include ../common.mk
