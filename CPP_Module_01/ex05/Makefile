@@ -1,8 +1,8 @@
 # Makefile
 
 # Specific variables
-SRCS = 
-TARGET = 
+SRCS = main.cpp Harl.hpp Harl.cpp
+TARGET = Harl
 
 # Include common rules and variables
 include ../common.mk
