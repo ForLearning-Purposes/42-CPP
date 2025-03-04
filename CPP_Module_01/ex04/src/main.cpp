@@ -1,6 +1,8 @@
 #include "../include/Replace.hpp"
 #include <iostream>
 #include <string>
+#include <fstream>
+#include <cstdlib>
 
 // Forbidden functions : std::string::replace
 
@@ -15,10 +17,7 @@ Create a program that takes three parameters in the following order: a filename 
 two strings, s1 and s2
 */
 int main (int ac, char **av){
-    Replace replace;
-    std::string filename = "";
-    std::string s1 = "";
-    std::string s2 = "";    
+    Replace replaceClass;
 
     if (ac != 4){
         std::cout << "Error: Wrong number of arguments" << std::endl;
@@ -26,8 +25,13 @@ int main (int ac, char **av){
         return 1;
     }
     else {
-        args_handling(av, filename, s1, s2);
-        replace.replace(filename, s1, s2);
+        args_handling(av);
+        const std::string filename = av[1];
+        const std::string cont = content(filename);
+        const std::string search = av[2];
+        const std::string replace = av[3];
+        //check first how std::string::replace works
+        replaceClass.replace(filename, search, replace, cont);
     }
     return 0;
 }

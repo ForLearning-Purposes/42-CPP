@@ -7,9 +7,10 @@ class Replace {
     public:
         Replace();
         ~Replace();
-        void replace(std::string filename, std::string s1, std::string s2);
+        void replace(std::string filename, std::string search, std::string replace, std::string content);
 };
 
-void args_handling(char **av, std::string &filename, std::string &s1, std::string &s2);
+void                args_handling(char **av);
+const std::string   content(std::string filename);
 
 #endif
