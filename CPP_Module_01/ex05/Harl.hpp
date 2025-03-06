@@ -21,4 +21,11 @@ class Harl {
         void error( void );
 };
 
+#define DEBUG 0
+#define INFO 1
+#define WARNING 2
+#define ERROR 3
+
+int complainLevel(std::string level);
+
 # endif
