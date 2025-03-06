@@ -16,14 +16,21 @@ HumanA and HumanB are almost identical except for these two small details:
 */
 class HumanB {
     public:
-        HumanB(std::string name);
+        HumanB(std::string name); //I could have used a wepon pointer here as well and set it to NULL
         ~HumanB(void);
         void setName(std::string &name);
         void setWeapon(Weapon &weapon);
         void attack(void);
     private:
         std::string name;
-        Weapon *weapon; // explain why we use pointer here.
+        Weapon *weapon;
 };
+
+/*
+Why Use a Pointer (Weapon *weapon) in HumanB?
+• A pointer can be null, meaning HumanB may or may not have a weapon.
+• HumanB can exist without a weapon and can later be assigned one using setWeapon().
+• Pointers can be reassigned, so HumanB can change weapons dynamically.
+*/
 
 #endif

@@ -22,7 +22,14 @@ class HumanA {
         bool isArmed(void);
     private:
         std::string name;
-        Weapon &weapon; // explain why we use reference here.
+        Weapon &weapon;
 };
+
+/*
+Why Use a Reference (Weapon &weapon) in HumanA?
+• A reference must be initialized when declared and cannot be changed afterward.
+• This means HumanA must always have a weapon; it cannot exist without being armed.
+• Since references do not allow reassignment, HumanA's weapon cannot change once set in the constructor.
+*/
 
 #endif
