@@ -22,7 +22,9 @@ void HumanB::setWeapon(Weapon &weapon) {
 
 //• HumanB may not always have a weapon.
 void HumanB::attack(void) {
-    if (this->weapon->getType() == "")
+    //if I DON'T CHECK FOR NULL POINTER, I WILL GET A SEGMENTATION FAULT,
+    //BECAUSE IN ELSE THE POINTER WOULD BE DEREFERENCED
+    if (this->weapon == NULL || this->weapon->getType() == "")
         std::cout << this->name << " attacks with their bare hands" << std::endl;
     else
         std::cout << this->name << " attacks with their " << this->weapon->getType() << std::endl;
