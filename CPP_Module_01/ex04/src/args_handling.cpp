@@ -13,12 +13,6 @@ void args_handling(char **av){
         std::cout << "Error: Filename too long" << std::endl;
         exit(1);
     }
-    for (int i = 0; av[1][i] != '\0'; i++){
-        if (!isalnum(av[1][i])) { // isalnum checks if the character is alphanumeric (letter or digit)
-            std::cout << "Error: Invalid filename" << std::endl;
-            exit(1);
-        }
-    }
     std::ifstream file(av[1]);
     if (!file.is_open()){
         std::cout << "Error: File does not exist" << std::endl;
