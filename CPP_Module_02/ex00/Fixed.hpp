@@ -6,8 +6,10 @@
 class Fixed {
     public:
         Fixed(void);
-        // learn first about copy constructor
-        // and Copy assignment operator overload
+        // Copy Constructor
+        Fixed(const Fixed& copy);
+        // learn Copy Assignment Operator overload
+        Fixed& operator=(const Fixed& copy);
         ~Fixed(void);
         int getRawBits( void ) const;
         void setRawBits( int const raw );
