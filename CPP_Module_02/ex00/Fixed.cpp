@@ -12,19 +12,18 @@ Fixed::~Fixed(void) {
 }
 
 // (3) copy constructor
-Fixed::Fixed(const Fixed& copy) : fixedPointValue(copy.fixedPointValue) {
+Fixed::Fixed(const Fixed& copy) {
     std::cout << "Copy constructor called" << std::endl;
+    //this->fixedPointValue = copy.getRawBits();
+    *this = copy;
 }
 
 // (3 or 4) copy assignment operator | 2 because it is part of copy constructor
 Fixed& Fixed::operator=(const Fixed& copy) {
     std::cout << "Copy assignment operator called" << std::endl;
     if (&copy == this) {
-        return *this; // return the object itself because it is already the same as the object we are trying to assign to it
-        // return *this; is a common practice in operator= overloading to handle self-assignment.
-        // * will return the object itself, so the object will not be changed.
-        // if it's without * it will return the object itself, but it will be copied to another object first.
-    }
+        return *this;
+       }
     else
         this->fixedPointValue = copy.getRawBits();
     return *this;
