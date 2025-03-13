@@ -1,6 +1,14 @@
 #include <iostream>
 #include "Fixed.hpp"
 
+/*
+Questions:
+1. How do toIndex() and toFloat() work?
+2. What is fixed-point number?
+3. What are operators?
+4. What are floating-point numbers?
+5. What is the difference between fixed-point and floating-point numbers?
+*/
 int main() {
     Fixed a(0);
     Fixed b(10);
