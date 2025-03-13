@@ -23,6 +23,7 @@ class Fixed {
         static const int fractionalBits = 8;
 };
 
-std::ostream    &operator<<(std::ostream &o, Fixed const &fixed);
+// Overload the << operator | it's making the output of the object to the console
+std::ostream    &operator<<(std::ostream &output, Fixed const &fixed);
 
 #endif

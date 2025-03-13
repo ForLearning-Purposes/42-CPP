@@ -53,8 +53,8 @@ void Fixed::setRawBits( int const raw ) {
     this->fixedPointValue = raw;
 }
 
-std::ostream	&operator<<(std::ostream &o, Fixed const &fixed)
+std::ostream	&operator<<(std::ostream &output, Fixed const &fixed)
 {
-    o << fixed.toFloat();
-    return (o);
+    output << fixed.toFloat();
+    return (output);
 }
