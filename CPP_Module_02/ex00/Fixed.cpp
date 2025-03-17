@@ -2,12 +2,12 @@
 
 // The rule of 3. The rule of three (also known as the Law of The Big Three or The Big Three) is a rule of thumb in C++ (prior to C++11) that claims that if a class defines one (or more) of the following it should probably explicitly define all three:
 // (1) constructor
-Fixed::Fixed(void) : fixedPointValue(0) {
+Fixed::Fixed() : fixedPointValue(0) {
     std::cout << "Default constructor called" << std::endl;
 }
 
 // (2) destructor
-Fixed::~Fixed(void) {
+Fixed::~Fixed() {
     std::cout << "Destructor called" << std::endl;
 }
 
@@ -23,23 +23,12 @@ Fixed& Fixed::operator=(const Fixed& copy) {
     std::cout << "Copy assignment operator called" << std::endl;
     if (&copy == this) {
         return *this;
-       }
-    else
+    }
+    else {
         this->fixedPointValue = copy.getRawBits();
+    }
     return *this;
 }
-
-/*
-INFO:
-1.  operator= is a special function used for copying an object and assigning it to another (already existing) object of the same type/class.
-2.  if we don't define operator=, the compiler will generate a default one for us.
-    which means it's goind to perform a shallow copy of the object. But we need to
-    perform a deep copy of the object because if we had a pointer in the object, the
-    default operator= would copy the address of the pointer, not the value it points to.
-    which can lead to a double delete/free problem.
-3.  copy constrictur is constructor and is used in creating new oobject by copying the
-    values of another aleady existing object. Performing a deep copy of the object.
-*/
 
 //****Functions****//
 int Fixed::getRawBits( void ) const {

@@ -1,7 +1,6 @@
 #include "Fixed.hpp"
 #include <cmath>
 
-//**** Constructors ****//
 Fixed::Fixed(void) : fixedPointValue(0) {}
 
 Fixed::Fixed(const int value) : fixedPointValue(0) {

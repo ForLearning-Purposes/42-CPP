@@ -5,12 +5,10 @@
 
 class Fixed {
     public:
-        Fixed(void);
-        // Copy Constructor
+        Fixed();
         Fixed(const Fixed& copy);
-        // learn Copy Assignment Operator overload
         Fixed& operator=(const Fixed& copy);
-        ~Fixed(void);
+        ~Fixed();
         int getRawBits( void ) const;
         void setRawBits( int const raw );
     private:
