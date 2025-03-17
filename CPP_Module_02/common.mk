@@ -1,10 +1,11 @@
 # common.mk
 
 # Variables
-CXX = g++
+CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 OBJDIR = bin
 OBJS = $(patsubst %.cpp,$(OBJDIR)/%.o,$(SRCS))
+DEP = $(OBJS:%.o=%.d)
 
 # Rules
 all: $(TARGET)
@@ -12,9 +13,11 @@ all: $(TARGET)
 $(TARGET): $(OBJS)
 	$(CXX) $(CXXFLAGS) -o $(TARGET) $(OBJS)
 
+-include $(DEP)
+
 $(OBJDIR)/%.o: %.cpp
 	@mkdir -p $(dir $@)
-	$(CXX) $(CXXFLAGS) -c $< -o $@
+	$(CXX) $(CXXFLAGS) -MMD -c $< -o $@
 
 clean:
 	rm -f $(OBJS)

@@ -28,7 +28,7 @@ Fixed& Fixed::operator=(const Fixed& copy) {
 //****Operators****//
 //6 comparison operators: >, <, >=, <=, ==, !=
 bool Fixed::operator>(const Fixed& fix) const {
-    return (this->fixedPointValue > fix.toFloat());
+    return (this->fixedPointValue > fix.getRawBits());
 }
 
 bool Fixed::operator<(const Fixed& fix) const {
