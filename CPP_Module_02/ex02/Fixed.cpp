@@ -148,6 +148,90 @@ void Fixed::setRawBits( int const raw ) {
 
 std::ostream	&operator<<(std::ostream &output, Fixed const &fixed)
 {
-    output << fixed.toFloat();
+    output << fixed.toFloat(); //Operator za umetanje (Stream Insertion Operator)
     return (output);
 }
+
+/*
+`std::ostream &`
+
+- `std::ostream`: Ovo je klasa iz standardne biblioteke C++ koja se koristi za izlazne tokove, kao što su konzola ili fajlovi.
+- `&`: Ovo označava referencu. U ovom slučaju, funkcija vraća referencu na `std::ostream` objekat. Korišćenje reference omogućava da se izbegne kopiranje objekta, što može biti efikasnije.
+
+`operator<<`
+
+- **`operator<<`**: Ovo je preopterećenje operatora `<<`. U C++,
+    operatori kao što su `+`, `-`, `*`, `<<`, itd. mogu biti preopterećeni
+    za rad sa korisnički definisanim tipovima podataka. U ovom slučaju,
+    preopterećujemo operator `<<` da bismo omogućili ispis objekta tipa 
+*/
+
+/*
+Naravno! U C++ jeziku, simboli `<<` i `>>` imaju različita značenja u zavisnosti od konteksta u kojem se koriste.
+
+### `<<` Operator
+1. **Operator za pomeranje ulevo (Bitwise Left Shift)**:
+   - Kada se koristi sa celobrojnim tipovima, `<<` pomera bitove broja ulevo za određeni broj pozicija.
+   - Na primer:
+     ```cpp
+     int x = 5; // 00000101 u binarnom
+     int y = x << 1; // 00001010 u binarnom, što je 10 u decimalnom
+     ```
+
+2. **Operator za umetanje (Stream Insertion Operator)**:
+   - Kada se koristi sa `std::ostream` objektima (kao što je `std::cout`), `<<` se koristi za umetanje podataka u tok (stream).
+   - Na primer:
+     ```cpp
+     std::cout << "Hello, World!" << std::endl;
+     ```
+
+### `>>` Operator
+1. **Operator za pomeranje udesno (Bitwise Right Shift)**:
+   - Kada se koristi sa celobrojnim tipovima, `>>` pomera bitove broja udesno za određeni broj pozicija.
+   - Na primer:
+     ```cpp
+     int x = 10; // 00001010 u binarnom
+     int y = x >> 1; // 00000101 u binarnom, što je 5 u decimalnom
+     ```
+
+2. **Operator za izdvajanje (Stream Extraction Operator)**:
+   - Kada se koristi sa `std::istream` objektima (kao što je `std::cin`), `>>` se koristi za izdvajanje podataka iz toka (stream).
+   - Na primer:
+     ```cpp
+     int number;
+     std::cin >> number;
+     ```
+
+### Vaš Kod
+U vašem kodu:
+```cpp
+output << fixed.toFloat();
+```
+`<<` se koristi kao operator za umetanje (stream insertion operator) da bi se rezultat 
+
+fixed.toFloat()
+
+funkcije umetnuo u 
+
+output
+
+tok (stream).
+
+### Funkcija 
+
+toFloat
+
+Funkcija 
+
+toFloat
+konvertuje fiksnu tačku (fixed-point) vrednost u `float` vrednost. Evo kako funkcija radi:
+```cpp
+float Fixed::toFloat( void ) const {
+    return (float)this->fixedPointValue / (float)(1 << this->fractionalBits);
+}
+```
+- `this->fixedPointValue` je celobrojna vrednost koja predstavlja fiksnu tačku.
+- `this->fractionalBits` je broj bitova koji se koriste za frakcioni deo.
+- `(1 << this->fractionalBits)` pomera bit `1` ulevo za `fractionalBits` pozicija, što efektivno daje vrednost `2^fractionalBits`.
+- Konačno, celobrojna vrednost se deli sa `2^fractionalBits` da bi se dobila `float` vrednost.
+*/
