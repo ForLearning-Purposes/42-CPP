@@ -82,6 +82,25 @@ int main()
         }
 
         {
+            std::cout << std::endl;
+            std::cout << "**********Test 4**********" << std::endl;
+            std::cout << std::endl;
+
+            Cat cat;
+            {
+                Cat cat2 = cat;
+            }
+            Dog dog;
+            {
+                Dog dog2 = dog;
+            }
+            Animal animal;
+            {
+                Animal animal2 = animal;
+            }
+        }
+
+        {
             // Animal *dog = new Dog();
             // dog = new Cat();
             // std::cout << dog->hehe << std::endl;

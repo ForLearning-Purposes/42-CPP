@@ -121,6 +121,25 @@ int main()
             std::cout << "**********Test 6**********" << std::endl;
             std::cout << std::endl;
 
+            Cat cat;
+            {
+                Cat cat2 = cat;
+            }
+            Dog dog;
+            {
+                Dog dog2 = dog;
+            }
+            Brain brain;
+            {
+                Brain brain2 = brain;
+            }
+        }
+
+        {
+            std::cout << std::endl;
+            std::cout << "**********Test 7**********" << std::endl;
+            std::cout << std::endl;
+
             const AAnimal* j = new Dog();
             const AAnimal* i = new Cat();
             delete j;//should not create a leak
