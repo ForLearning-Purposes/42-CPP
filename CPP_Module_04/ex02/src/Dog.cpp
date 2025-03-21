@@ -4,9 +4,6 @@
 Dog::Dog() : AAnimal(), type("Dog") {
     std::cout << "Dog constructor called" << std::endl;
     brain = new Brain();
-    if (brain == NULL) {
-        std::cout << "Memory allocation failed" << std::endl;
-    }
 }
 
 Dog::Dog(const Dog &copy) : AAnimal(copy) {
@@ -27,10 +24,7 @@ Dog& Dog::operator=(const Dog &copy) {
 
 Dog::~Dog() {
     std::cout << "Dog destructor called" << std::endl;
-    if (brain == NULL)
-        std::cout << "Memory allocation failed" << std::endl;
-    else 
-        delete brain;
+    delete brain;
 }
 
 void Dog::makeSound() const {

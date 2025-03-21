@@ -4,9 +4,6 @@
 Cat::Cat() : AAnimal(), type("Cat") {
     std::cout << "Cat constructor called" << std::endl;
     brain = new Brain();
-    if (brain == NULL) {
-        std::cout << "Memory allocation failed" << std::endl;
-    }
 }
 
 Cat::Cat(const Cat &copy) : AAnimal(copy) {
@@ -27,10 +24,7 @@ Cat& Cat::operator=(const Cat &copy) {
 
 Cat::~Cat() {
     std::cout << "Cat destructor called" << std::endl;
-    if (brain == NULL)
-        std::cout << "Memory allocation failed" << std::endl;
-    else 
-        delete brain;
+    delete brain;
 }
 
 void Cat::makeSound() const {

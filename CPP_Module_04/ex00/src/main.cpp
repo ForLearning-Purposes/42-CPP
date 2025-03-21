@@ -29,49 +29,68 @@ Subject:
 
 int main()
 {
-    {
-        std::cout << "**********Test 1**********" << std::endl;
-        std::cout << std::endl;
+    try {
+        {
+            // Animal *lol = new Dog();
+            // Dog *hehe = new Dog();
+            // lol->makeSound();
+            // delete lol;
+        }
 
-        std::cout << "***Animal: " << std::endl;
-        Animal animal;
-        animal.printType();
-        animal.makeSound();
-        std::cout << "***Dog: " << std::endl;
-        Dog dog;
-        dog.printType();
-        dog.makeSound();
-        std::cout << "***Cat: " << std::endl;
-        Cat cat;
-        cat.printType();
-        cat.makeSound();
+        {
+            std::cout << "**********Test 1**********" << std::endl;
+            std::cout << std::endl;
+
+            std::cout << "***Animal: " << std::endl;
+            Animal animal;
+            animal.printType();
+            animal.makeSound();
+            std::cout << "***Dog: " << std::endl;
+            Dog dog;
+            dog.printType();
+            dog.makeSound();
+            std::cout << "***Cat: " << std::endl;
+            Cat cat;
+            cat.printType();
+            cat.makeSound();
+        }
+
+        {
+            std::cout << std::endl;
+            std::cout << "**********Test 2**********" << std::endl;
+            std::cout << std::endl;
+
+            Animal *cat1 = new Cat();
+            cat1->makeSound();
+            Animal *dog1 = new Dog();
+            dog1->makeSound();
+            delete cat1;
+            delete dog1;
+        
+        }
+
+        {
+            std::cout << std::endl;
+            std::cout << "**********Test 3**********" << std::endl;
+            std::cout << std::endl;
+
+            WrongAnimal *wrongCat = new WrongCat();
+            std::cout << "****Info:\n"
+            << "\t- So here you would see Derived message if we used virtual" << std::endl;
+            wrongCat->makeSound();
+            delete wrongCat;
+        }
+
+        {
+            // Animal *dog = new Dog();
+            // dog = new Cat();
+            // std::cout << dog->hehe << std::endl;
+        }
+    }
+    catch (std::bad_alloc &e) {
+        std::cerr << "Error: " << e.what() << std::endl;
     }
 
-    {
-        std::cout << std::endl;
-        std::cout << "**********Test 2**********" << std::endl;
-        std::cout << std::endl;
-
-        Animal *cat1 = new Cat();
-        cat1->makeSound();
-        Animal *dog1 = new Dog();
-        dog1->makeSound();
-        delete cat1;
-        delete dog1;
-    
-    }
-
-    {
-        std::cout << std::endl;
-        std::cout << "**********Test 3**********" << std::endl;
-        std::cout << std::endl;
-
-        WrongAnimal *wrongCat = new WrongCat();
-        std::cout << "****Info:\n"
-        << "\t- So here you would see Derived message if we used virtual" << std::endl;
-        wrongCat->makeSound();
-        delete wrongCat;
-    }
     return 0;
 }
 

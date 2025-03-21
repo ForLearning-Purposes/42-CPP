@@ -2,6 +2,7 @@
 #include "../include/Animal.hpp"
 
 Cat::Cat() : Animal(), type("Cat") {
+    // this->hehe = "hehe";
     std::cout << "Cat constructor called" << std::endl;
     brain = new Brain();
 }

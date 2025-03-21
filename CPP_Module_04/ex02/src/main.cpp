@@ -28,102 +28,108 @@ Subject:
 
 int main()
 {
+    try
     {
-        std::cout << "**********Test 1**********" << std::endl;
-        std::cout << std::endl;
+        {
+            std::cout << "**********Test 1**********" << std::endl;
+            std::cout << std::endl;
 
-        std::cout << "***AAnimal: " << std::endl;
-        std::cout << "\tinstance of AAnimal can't be crated because AAnimal is abstract class" << std::endl;
-        // AAnimal AAnimal;
-        // AAnimal.printType();
-        // AAnimal.makeSound();
-        std::cout << "***Dog: " << std::endl;
-        Dog dog;
-        dog.printType();
-        dog.makeSound();
-        std::cout << "***Cat: " << std::endl;
-        Cat cat;
-        cat.printType();
-        cat.makeSound();
-    }
+            std::cout << "***AAnimal: " << std::endl;
+            std::cout << "\tinstance of AAnimal can't be crated because AAnimal is abstract class" << std::endl;
+            // AAnimal AAnimal;
+            // AAnimal.printType();
+            // AAnimal.makeSound();
+            std::cout << "***Dog: " << std::endl;
+            Dog dog;
+            dog.printType();
+            dog.makeSound();
+            std::cout << "***Cat: " << std::endl;
+            Cat cat;
+            cat.printType();
+            cat.makeSound();
+        }
 
-    {
-        std::cout << std::endl;
-        std::cout << "**********Test 2**********" << std::endl;
-        std::cout << std::endl;
+        {
+            std::cout << std::endl;
+            std::cout << "**********Test 2**********" << std::endl;
+            std::cout << std::endl;
 
-        std::cout << "***Cat: " << std::endl;
-        AAnimal *cat1 = new Cat();
-        cat1->makeSound();
-        std::cout << "***Dog: " << std::endl;
-        AAnimal *dog1 = new Dog();
-        dog1->makeSound();
-        delete cat1;
-        delete dog1;
-    
-    }
+            std::cout << "***Cat: " << std::endl;
+            AAnimal *cat1 = new Cat();
+            cat1->makeSound();
+            std::cout << "***Dog: " << std::endl;
+            AAnimal *dog1 = new Dog();
+            dog1->makeSound();
+            delete cat1;
+            delete dog1;
+        }
 
-    {
-        std::cout << std::endl;
-        std::cout << "**********Test 3**********" << std::endl;
-        std::cout << std::endl;
-        std::cout << "***Cat: " << std::endl;
-        Cat cat;
-    }
+        {
+            std::cout << std::endl;
+            std::cout << "**********Test 3**********" << std::endl;
+            std::cout << std::endl;
+            std::cout << "***Cat: " << std::endl;
+            Cat cat;
+        }
 
-    {
-        std::cout << std::endl;
-        std::cout << "**********Test 4**********" << std::endl;
-        std::cout << std::endl;
+        {
+            std::cout << std::endl;
+            std::cout << "**********Test 4**********" << std::endl;
+            std::cout << std::endl;
 
-        std::cout << "***Array of AAnimals: " << std::endl;
-        int n = 4;
-        AAnimal *AAnimals[n]; // Array of pointers to AAnimal
-        std::cout << "\t- There ase " << n << " AAnimals in the array" << std::endl;
-        std::cout << std::endl;
-        std::cout << "***Creating array of Dogs and Cats:" << std::endl;
-        std::cout << std::endl;
-        for (int i = 0; i < n; i++) {
-            if (i % 2 == 0) {
-                std::cout << "\t- Dog index " << i << ":" << std::endl;
-                AAnimals[i] = new Dog();
-                AAnimals[i]->makeSound();
+            std::cout << "***Array of AAnimals: " << std::endl;
+            int n = 4;
+            AAnimal *AAnimals[n]; // Array of pointers to AAnimal
+            std::cout << "\t- There ase " << n << " AAnimals in the array" << std::endl;
+            std::cout << std::endl;
+            std::cout << "***Creating array of Dogs and Cats:" << std::endl;
+            std::cout << std::endl;
+            for (int i = 0; i < n; i++) {
+                if (i % 2 == 0) {
+                    std::cout << "\t- Dog index " << i << ":" << std::endl;
+                    AAnimals[i] = new Dog();
+                    AAnimals[i]->makeSound();
+                }
+                else {
+                    std::cout << "\t- Cat index " << i << ":" << std::endl;
+                    AAnimals[i] = new Cat();
+                    AAnimals[i]->makeSound();
+                }
             }
-            else {
-                std::cout << "\t- Cat index " << i << ":" << std::endl;
-                AAnimals[i] = new Cat();
-                AAnimals[i]->makeSound();
+
+            std::cout << std::endl;
+            std::cout << "***Deleting array of Dogs and Cats:" << std::endl;
+            std::cout << std::endl;
+            for (int i = 0; i < n; i++) {
+                std::cout << "\t- AAnimal index " << i << ":" << std::endl;
+                delete AAnimals[i];
             }
         }
 
-        std::cout << std::endl;
-        std::cout << "***Deleting array of Dogs and Cats:" << std::endl;
-        std::cout << std::endl;
-        for (int i = 0; i < n; i++) {
-            std::cout << "\t- AAnimal index " << i << ":" << std::endl;
-            delete AAnimals[i];
+        {
+            std::cout << std::endl;
+            std::cout << "**********Test 5**********" << std::endl;
+            std::cout << std::endl;
+
+            Dog dog;
+            dog.getBrain()->setIdea(10, "I am a dog");
+            std::cout << dog.getBrain()->getIdea(10) << std::endl;
+        }
+
+        {
+            std::cout << std::endl;
+            std::cout << "**********Test 6**********" << std::endl;
+            std::cout << std::endl;
+
+            const AAnimal* j = new Dog();
+            const AAnimal* i = new Cat();
+            delete j;//should not create a leak
+            delete i;
         }
     }
-
+    catch(const std::bad_alloc& e)
     {
-        std::cout << std::endl;
-        std::cout << "**********Test 5**********" << std::endl;
-        std::cout << std::endl;
-
-        Dog dog;
-        dog.getBrain()->setIdea(10, "I am a dog");
-        std::cout << dog.getBrain()->getIdea(10) << std::endl;
-    }
-
-    {
-        std::cout << std::endl;
-        std::cout << "**********Test 6**********" << std::endl;
-        std::cout << std::endl;
-
-        const AAnimal* j = new Dog();
-        const AAnimal* i = new Cat();
-        delete j;//should not create a leak
-        delete i;
+        std::cerr << "Error: " << e.what() << std::endl;
     }
     return 0;
 }

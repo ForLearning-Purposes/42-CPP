@@ -28,98 +28,101 @@ Subject:
 
 int main()
 {
-    {
-        std::cout << "**********Test 1**********" << std::endl;
-        std::cout << std::endl;
+    try {
+        {
+            std::cout << "**********Test 1**********" << std::endl;
+            std::cout << std::endl;
 
-        std::cout << "***Animal: " << std::endl;
-        Animal animal;
-        animal.printType();
-        animal.makeSound();
-        std::cout << "***Dog: " << std::endl;
-        Dog dog;
-        dog.printType();
-        dog.makeSound();
-        std::cout << "***Cat: " << std::endl;
-        Cat cat;
-        cat.printType();
-        cat.makeSound();
-    }
+            std::cout << "***Animal: " << std::endl;
+            Animal animal;
+            animal.printType();
+            animal.makeSound();
+            std::cout << "***Dog: " << std::endl;
+            Dog dog;
+            dog.printType();
+            dog.makeSound();
+            std::cout << "***Cat: " << std::endl;
+            Cat cat;
+            cat.printType();
+            cat.makeSound();
+        }
+        {
+            std::cout << std::endl;
+            std::cout << "**********Test 2**********" << std::endl;
+            std::cout << std::endl;
 
-    {
-        std::cout << std::endl;
-        std::cout << "**********Test 2**********" << std::endl;
-        std::cout << std::endl;
+            std::cout << "***Cat: " << std::endl;
+            Animal *cat1 = new Cat();
+            cat1->makeSound();
+            std::cout << "***Dog: " << std::endl;
+            Animal *dog1 = new Dog();
+            dog1->makeSound();
+            delete cat1;
+            delete dog1;
+        }
 
-        std::cout << "***Cat: " << std::endl;
-        Animal *cat1 = new Cat();
-        cat1->makeSound();
-        std::cout << "***Dog: " << std::endl;
-        Animal *dog1 = new Dog();
-        dog1->makeSound();
-        delete cat1;
-        delete dog1;
-    
-    }
+        {
+            std::cout << std::endl;
+            std::cout << "**********Test 3**********" << std::endl;
+            std::cout << std::endl;
+            std::cout << "***Cat: " << std::endl;
+            Cat cat;
+        }
 
-    {
-        std::cout << std::endl;
-        std::cout << "**********Test 3**********" << std::endl;
-        std::cout << std::endl;
-        std::cout << "***Cat: " << std::endl;
-        Cat cat;
-    }
-
-    {
-        std::cout << std::endl;
-        std::cout << "**********Test 4**********" << std::endl;
-        std::cout << std::endl;
-        std::cout << "***Array of Animals: " << std::endl;
-        int n = 4;
-        Animal *animals[n]; // Array of pointers to Animal
-        std::cout << "\t- There ase " << n << " animals in the array" << std::endl;
-        std::cout << std::endl;
-        std::cout << "***Creating array of Dogs and Cats:" << std::endl;
-        std::cout << std::endl;
-        for (int i = 0; i < n; i++) {
-            if (i % 2 == 0) {
-                std::cout << "\t- Dog index " << i << ":" << std::endl;
-                animals[i] = new Dog();
+        {
+            std::cout << std::endl;
+            std::cout << "**********Test 4**********" << std::endl;
+            std::cout << std::endl;
+            std::cout << "***Array of Animals: " << std::endl;
+            int n = 4;
+            Animal *animals[n]; // Array of pointers to Animal
+            std::cout << "\t- There ase " << n << " animals in the array" << std::endl;
+            std::cout << std::endl;
+            std::cout << "***Creating array of Dogs and Cats:" << std::endl;
+            std::cout << std::endl;
+            for (int i = 0; i < n; i++) {
+                if (i % 2 == 0) {
+                    std::cout << "\t- Dog index " << i << ":" << std::endl;
+                    animals[i] = new Dog();
+                }
+                else {
+                    std::cout << "\t- Cat index " << i << ":" << std::endl;
+                    animals[i] = new Cat();
+                }
             }
-            else {
-                std::cout << "\t- Cat index " << i << ":" << std::endl;
-                animals[i] = new Cat();
+            std::cout << std::endl;
+            std::cout << "***Deleting array of Dogs and Cats:" << std::endl;
+            std::cout << std::endl;
+            for (int i = 0; i < n; i++) {
+                std::cout << "\t- Animal index " << i << ":" << std::endl;
+                delete animals[i];
             }
         }
-        std::cout << std::endl;
-        std::cout << "***Deleting array of Dogs and Cats:" << std::endl;
-        std::cout << std::endl;
-        for (int i = 0; i < n; i++) {
-            std::cout << "\t- Animal index " << i << ":" << std::endl;
-            delete animals[i];
+
+        {
+            std::cout << std::endl;
+            std::cout << "**********Test 5**********" << std::endl;
+            std::cout << std::endl;
+
+            std::cout << "***Cat: " << std::endl;
+            Cat cat;
+            cat.getBrain()->setIdea(0, "I am a cat");
+            std::cout << cat.getBrain()->getIdea(0) << std::endl;
+        }
+
+        {
+            std::cout << std::endl;
+            std::cout << "**********Test 6**********" << std::endl;
+            std::cout << std::endl;
+
+            const Animal* j = new Dog();
+            const Animal* i = new Cat();
+            delete j;//should not create a leak
+            delete i;
         }
     }
-
-    {
-        std::cout << std::endl;
-        std::cout << "**********Test 5**********" << std::endl;
-        std::cout << std::endl;
-
-        std::cout << "***Cat: " << std::endl;
-        Cat cat;
-        cat.getBrain()->setIdea(0, "I am a cat");
-        std::cout << cat.getBrain()->getIdea(0) << std::endl;
-    }
-
-    {
-        std::cout << std::endl;
-        std::cout << "**********Test 6**********" << std::endl;
-        std::cout << std::endl;
-
-        const Animal* j = new Dog();
-        const Animal* i = new Cat();
-        delete j;//should not create a leak
-        delete i;
+    catch (std::bad_alloc &e) {
+        std::cerr << "Error: " << e.what() << std::endl;
     }
     return 0;
 }
