@@ -19,7 +19,7 @@ Cat& Cat::operator=(const Cat &copy) {
     }
     else {
         this->type = copy.type;
-        if (this->brain)
+        if (this->brain != nullptr)
             delete this->brain;
         this->brain = new Brain(*copy.brain);
     }
