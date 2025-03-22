@@ -18,7 +18,7 @@ Dog& Dog::operator=(const Dog &copy) {
     }
     else {
         this->type = copy.type;
-        if (this->brain != nullptr)
+        if (this->brain)
             delete this->brain;
         this->brain = new Brain(*copy.brain);
     }
