@@ -1,12 +1,7 @@
 #include "../include/Brain.hpp"
-#include <algorithm>
 
 Brain::Brain() {
     std::cout << "Brain default constructor called" << std::endl;
-    std::fill_n(ideas, 100, "");
-    // for (int i = 0; i < 100; i++) {
-    //     this->ideas[i] = "";
-    // }
 }
 
 
