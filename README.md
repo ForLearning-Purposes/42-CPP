@@ -77,3 +77,9 @@
     #### Interfaces in OOP
     - An interface is a contract that defines a set of methods that a class must implement. It does not provide any implementation for these methods, only the method signatures (i.e., the method name, parameters, and return type). Classes that implement an interface must provide their own implementation for all of the interface's methods.
 ---
+### Module 05
+- Repetition and Exceptions
+    #### Repetition
+    - 
+    #### Exceptions
+    - 
