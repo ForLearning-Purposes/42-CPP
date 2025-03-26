@@ -14,6 +14,7 @@ class Bureaucrat {
         const std::string getName() const;
         int getGrade() const;
         void setGrade(const int grade);
+        void signForm(bool sign) const; // new in ex01
 
         // User-defined exception classes:
         class GradeTooHighException : public std::exception {
