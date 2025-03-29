@@ -8,6 +8,8 @@ class Bureaucrat {
     public:
         Bureaucrat();
         Bureaucrat(std::string name, int grade);
+        Bureaucrat(const Bureaucrat& src);
+        Bureaucrat& operator=(const Bureaucrat& rhs);
         ~Bureaucrat();
         void incrementGrade();
         void decrementGrade();

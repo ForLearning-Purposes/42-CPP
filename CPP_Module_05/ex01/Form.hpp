@@ -3,24 +3,17 @@
 
 #include <iostream>
 #include <exception>
-#include "Bureaucrat.hpp"
 
-/*  
-The grades of the Form follow the same rules as those of the Bureaucrat. Thus, the
-following exceptions will be thrown if a form’s grade is out of bounds:
-Form::GradeTooHighException and Form::GradeTooLowException.
-*/
+class Bureaucrat; // Forward declaration of Bureaucrat class
 
 class Form {
     public:
+        //constructors and destructors
         Form();
-        Form(std::string name, int signGrade);
+        Form(const Form& copy);
+        Form& operator=(const Form& copy);
         ~Form();
-        std::string getName() const;
-        bool getSigned() const;
-        int getSignGrade() const;
-        void beSigned(const Bureaucrat& bureaucrat);
-
+        // exceptions
         class GradeTooHighException : public std::exception {
             public:
                 const char* what() const throw();
@@ -29,10 +22,17 @@ class Form {
             public:
                 const char* what() const throw();
         };
+        //getters and setters
+        std::string getName() const;
+        bool        getSigned() const;
+        int         getSignGrade() const;
+        void        setSigned(bool sign);
+        //functions
+        void        beSigned(const Bureaucrat& bureaucrat);
     private:
-        const std::string _name;
-        bool _signed;
-        const int _signGrade;
+        const       std::string _name;
+        const       int _signGrade;
+        bool        _signed;
 };
 
 std::ostream& operator<<(std::ostream& os, Form const& rhs);

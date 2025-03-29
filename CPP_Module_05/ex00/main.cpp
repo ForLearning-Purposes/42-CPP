@@ -2,7 +2,7 @@
 
 int main() {
     try {
-        Bureaucrat helo("Monika", 149);
+        Bureaucrat helo("Monika", 3);
         helo.incrementGrade();
         helo.decrementGrade();
         // helo.incrementGrade();

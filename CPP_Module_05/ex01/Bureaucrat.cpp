@@ -1,23 +1,19 @@
 #include "Bureaucrat.hpp"
+#include "Form.hpp"
 
 // Constructors and destructors:
-Bureaucrat::Bureaucrat() : _name("default"), _grade(150) {}
-
-Bureaucrat::Bureaucrat(std::string name, int grade) : _name(name) {
-    this->setGrade(grade);
-}
-
+Bureaucrat::Bureaucrat() : _name("Default_Name"), _grade(150) {}
+Bureaucrat::Bureaucrat(std::string name, int grade) : _name(name) {this->setGrade(grade);}
+//add copy constructor and assignment operator
 Bureaucrat::~Bureaucrat() {}
 
 // Getters and setters:
 const std::string Bureaucrat::getName() const {
     return this->_name;
 }
-
 int Bureaucrat::getGrade() const {
     return this->_grade;
 }
-
 void Bureaucrat::setGrade(const int grade) {
     if (grade < 1) {
         throw Bureaucrat::GradeTooHighException();
@@ -26,20 +22,9 @@ void Bureaucrat::setGrade(const int grade) {
     }
     this->_grade = grade;
 }
-
 // Increment and decrement grade:
 void Bureaucrat::incrementGrade() {
-    std::cout << "Incrementing grade" << std::endl;
-    std::cout << "Current grade: " << this->_grade << std::endl;
-    if (this->_grade >= 150) {
-        throw Bureaucrat::GradeTooHighException();
-    }
-    this->_grade++;
-    std::cout << "New grade: " << this->_grade << std::endl;
-}
-
-void Bureaucrat::decrementGrade() {
-    std::cout << "Incrementing grade" << std::endl;
+    std::cout << "\nIncrementing grade" << std::endl;
     std::cout << "Current grade: " << this->_grade << std::endl;
     if (this->_grade <= 1) {
         throw Bureaucrat::GradeTooLowException();
@@ -47,19 +32,33 @@ void Bureaucrat::decrementGrade() {
     this->_grade--;
     std::cout << "New grade: " << this->_grade << std::endl;
 }
+void Bureaucrat::decrementGrade() {
+    std::cout << "\nDecrementing grade" << std::endl;
+    std::cout << "Current grade: " << this->_grade << std::endl;
+    if (this->_grade >= 150) {
+        throw Bureaucrat::GradeTooHighException();
+    }
+    this->_grade++;
+    std::cout << "New grade: " << this->_grade << "\n" << std::endl;
+}
+
+//function to sign a form: 
+void Bureaucrat::signForm(Form &form) const {
+    form.beSigned(*this);
+}
 
 // User-defined exception classes:
 const char* Bureaucrat::GradeTooHighException::what() const throw() {
-    return "Grade too high\n";
+    return "\nERROR: Grade too high\n";
 }
 
 const char* Bureaucrat::GradeTooLowException::what() const throw() {
-    return "Grade too low\n";
+    return "\nERROR: Grade too low\n";
 }
 
 // Overload << operator:
 std::ostream& operator<<(std::ostream& os, Bureaucrat const& rhs) {
-    os << rhs.getName() << ", bureaucrat grade " << rhs.getGrade() << std::endl;
+    os << "\n***Bureaucrat:\n" << rhs.getName() << ", bureaucrat grade " << rhs.getGrade() << std::endl;
     return os;
 }
 

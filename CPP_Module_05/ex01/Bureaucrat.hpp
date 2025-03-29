@@ -4,17 +4,21 @@
 #include <iostream>
 #include <exception>
 
+class Form; // Forward declaration of Form class
+
 class Bureaucrat {
     public:
         Bureaucrat();
         Bureaucrat(std::string name, int grade);
+        Bureaucrat(const Bureaucrat& src);
+        Bureaucrat& operator=(const Bureaucrat& rhs);
         ~Bureaucrat();
         void incrementGrade();
         void decrementGrade();
         const std::string getName() const;
         int getGrade() const;
         void setGrade(const int grade);
-        void signForm(bool sign) const; // new in ex01
+        void signForm(Form &form) const; // new in ex01
 
         // User-defined exception classes:
         class GradeTooHighException : public std::exception {
