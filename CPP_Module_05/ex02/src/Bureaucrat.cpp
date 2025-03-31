@@ -1,15 +1,20 @@
-#include "Bureaucrat.hpp"
-#include "Form.hpp"
+#include "../include/AForm.hpp"
+#include "../include/Bureaucrat.hpp"
 
 // Constructors and destructors:
-Bureaucrat::Bureaucrat() : _name("Default_Name"), _grade(150) {}
+Bureaucrat::Bureaucrat() : _name("Default_Name"), _grade(150) {
+    std::cout << "\nDefault constructor called for Bureaucrat" << std::endl;
+}
 Bureaucrat::Bureaucrat(std::string name, int grade) : _name(name) {
+    std::cout << "\nConstructor with name and grade called for Bureaucrat" << std::endl;
     this->setGrade(grade);
 }
+
 Bureaucrat::Bureaucrat(const Bureaucrat &copy) : _name(copy._name) {
     std::cout << "\nCopy constructor called for Bureaucrat" << std::endl;
     *this = copy;
 }
+
 Bureaucrat& Bureaucrat::operator=(const Bureaucrat &copy) {
     std::cout << "Bureaucrat assignation operator is called" << std::endl;
     if (&copy == this) {
@@ -18,7 +23,10 @@ Bureaucrat& Bureaucrat::operator=(const Bureaucrat &copy) {
     this->_grade = copy._grade;
     return *this;
 }
-Bureaucrat::~Bureaucrat() {}
+
+Bureaucrat::~Bureaucrat() {
+    std::cout << "\nDestructor called for Bureaucrat" << std::endl;
+}
 
 // Getters and setters:
 const std::string Bureaucrat::getName() const {
@@ -56,7 +64,7 @@ void Bureaucrat::decrementGrade() {
 }
 
 //function to sign a form: 
-void Bureaucrat::signForm(Form &form) const {
+void Bureaucrat::signForm(AForm &form) const {
     form.beSigned(*this);
 }
 
