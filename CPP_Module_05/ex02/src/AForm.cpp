@@ -3,10 +3,19 @@
 #include <iostream>
 #include <string>
 
-AForm::AForm() : _name("Officially Official AForm of Officialness"), _signGrade(150), _signed(false) {
+AForm::AForm() : _name("Officially Official AForm of Officialness"), _signGrade(150), _signed(false), execGrade(150) {
     std::cout << "\nDefault constructor called for AForm" << std::endl;
 }
-AForm::AForm(const AForm& copy) : _name(copy._name), _signGrade(copy._signGrade) {
+AForm::AForm(const std::string& name, int signGrade, int execGrade) : _name(name), _signGrade(150), _signed(false), execGrade(execGrade) {
+    std::cout << "\nParameterized constructor called for AForm" << std::endl;
+    if (signGrade < 1 || execGrade < 1) {
+        throw AForm::GradeTooHighException();
+    }
+    else if (signGrade > 150 || execGrade > 150) {
+        throw AForm::GradeTooLowException();
+    }
+}
+AForm::AForm(const AForm& copy) : _name(copy._name), _signGrade(copy._signGrade), execGrade(copy.execGrade) {
     std::cout << "\nCopy constructor called for AForm" << std::endl;
     *this = copy;
 }
@@ -36,14 +45,6 @@ void AForm::setSigned(bool sign) {
     this->_signed = sign;
 }
 
-// Exceptions:
-const char* AForm::GradeTooHighException::what() const throw() {
-    return "\nERROR: AForm grade too high\n";
-}
-const char* AForm::GradeTooLowException::what() const throw() {
-    return "\nERROR: AForm grade too low\n";
-}
-
 // Functions:
 void AForm::beSigned(const Bureaucrat& bureaucrat) {
     std::cout << "\nBureaucrat grade = " << bureaucrat.getGrade() << "; _signGrade = " << this->_signGrade << std::endl;
@@ -55,6 +56,31 @@ void AForm::beSigned(const Bureaucrat& bureaucrat) {
         std::cout << bureaucrat.getName() << " couldn't sign " << this->_name << std::endl;
         throw AForm::GradeTooLowException();
     }
+}
+
+void AForm::execute(const Bureaucrat& executor) const {
+    if (!this->_signed) {
+        throw AForm::FormNotSignedException();
+    }
+    if (executor.getGrade() > this->execGrade) {
+        throw AForm::GradeTooLowException();
+    }
+    this->executeAction();
+}
+
+void AForm::executeAction() const {
+    std::cout << "Executing action of AForm" << std::endl;
+}
+
+// Exceptions:
+const char* AForm::GradeTooHighException::what() const throw() {
+    return "\nERROR: AForm grade too high\n";
+}
+const char* AForm::GradeTooLowException::what() const throw() {
+    return "\nERROR: AForm grade too low\n";
+}
+const char* AForm::FormNotSignedException::what() const throw() {
+    return "\nERROR: AForm not signed\n";
 }
 
 std::ostream& operator<<(std::ostream& os, AForm const& rhs) {
