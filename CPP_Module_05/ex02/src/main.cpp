@@ -79,30 +79,30 @@ int main()
             /*
             ********************************************************************************************************************
             */
-            std::cout << "*********SHRUBBERYCREATIONFORM:" << std::endl;
-            {
-                Bureaucrat bureaucrat("Bureaucrat", 1);
-                ShrubberyCreationForm shrubberyForm("home1");
-                bureaucrat.signForm(shrubberyForm);
-                shrubberyForm.execute(bureaucrat);
-                shrubberyForm.printAForm();
-            }
-            std::cout << "\n\n*********ROBOTOMYREQUESTFORM:" << std::endl;
-            {
-                Bureaucrat bureaucrat("Bureaucrat", 45);
-                RobotomyRequestForm RobotomyForm("home2");
-                bureaucrat.signForm(RobotomyForm);
-                RobotomyForm.execute(bureaucrat);
-                RobotomyForm.printAForm();
-            }
-            std::cout << "\n\n*********PRESIDENTIALPARDONFORM:" << std::endl;
-            {
-                Bureaucrat bureaucrat("Bureaucrat", 5);
-                PresidentialPardonForm PresidentialForm("home3");
-                bureaucrat.signForm(PresidentialForm);
-                PresidentialForm.execute(bureaucrat);
-                // PresidentialForm.printAForm();
-            }
+            // std::cout << "*********SHRUBBERYCREATIONFORM:" << std::endl;
+            // {
+            //     Bureaucrat bureaucrat("Bureaucrat", 1);
+            //     ShrubberyCreationForm shrubberyForm("home1");
+            //     bureaucrat.signForm(shrubberyForm);
+            //     shrubberyForm.execute(bureaucrat);
+            //     shrubberyForm.printAForm();
+            // }
+            // std::cout << "\n\n*********ROBOTOMYREQUESTFORM:" << std::endl;
+            // {
+            //     Bureaucrat bureaucrat("Bureaucrat", 45);
+            //     RobotomyRequestForm RobotomyForm("home2");
+            //     bureaucrat.signForm(RobotomyForm);
+            //     RobotomyForm.execute(bureaucrat);
+            //     RobotomyForm.printAForm();
+            // }
+            // std::cout << "\n\n*********PRESIDENTIALPARDONFORM:" << std::endl;
+            // {
+            //     Bureaucrat bureaucrat("Bureaucrat", 5);
+            //     PresidentialPardonForm PresidentialForm("home3");
+            //     bureaucrat.signForm(PresidentialForm);
+            //     PresidentialForm.execute(bureaucrat);
+            //     // PresidentialForm.printAForm();
+            // }
             /*
             ********************************************************************************************************************
             */
@@ -111,6 +111,10 @@ int main()
             /*
             ********************************************************************************************************************
             */
+            Bureaucrat bureaucrat("Bureaucrat", 1);
+            ShrubberyCreationForm shrubberyForm("home1");
+            bureaucrat.signForm(shrubberyForm);
+            bureaucrat.executeForm(shrubberyForm);
             /*
             ********************************************************************************************************************
             */

@@ -87,6 +87,22 @@ void Bureaucrat::signForm(AForm &form) const {
 }
 
 /*
+Lastly, add the executeForm(AForm const & form) const member function to the
+Bureaucrat class. It must attempt to execute the form. If successful, print something like:
+<bureaucrat> executed <form>
+If not, print an explicit error message.
+Implement and submit some tests to ensure everything works as expected
+*/
+void Bureaucrat::executeForm(AForm const & form) const {
+    if (form.getSigned() == false) {
+        std::cout << this->getName() << " couldn't execute " << form.getName() << " because the form is not signed." << std::endl;
+    } else {
+        form.execute(*this);
+        std::cout << this->getName() << " executed " << form.getName() << std::endl;
+    }
+}
+
+/*
 ********************************************************************************************************************************************************************
 */
 
