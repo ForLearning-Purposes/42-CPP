@@ -10,7 +10,12 @@
 
 class Bureaucrat;
 
+/*
+********************************************************************************************************************************************************************
+*/
+
 class AForm {
+
     public:
         AForm();
         AForm(const std::string& name, int signGrade, int execGrade);
@@ -22,9 +27,11 @@ class AForm {
         bool                getSigned() const;
         int                 getSignGrade() const;
         void                setSigned(bool sign);
+        int                 getExecGrade() const;
 
         void                beSigned(const Bureaucrat& bureaucrat);
-        void                execute(const Bureaucrat& executor) const;
+        virtual void        execute(const Bureaucrat& executor) const;
+
         class GradeTooHighException : public std::exception {
             public:
                 const char* what() const throw();
@@ -37,15 +44,26 @@ class AForm {
             public:
                 const char* what() const throw();
         };
+
     protected:
-        virtual void executeAction() const; // Pure virtual function to be implemented in derived classes
+        virtual void executeAction() const = 0;
+
     private:
         const       std::string _name;
         const       int _signGrade;
         bool        _signed;
         const int   execGrade;
+
 };
 
+/*
+********************************************************************************************************************************************************************
+*/
+
 std::ostream& operator<<(std::ostream& os, AForm const& rhs);
+
+/*
+********************************************************************************************************************************************************************
+*/
 
 #endif

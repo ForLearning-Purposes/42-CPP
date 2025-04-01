@@ -1,4 +1,5 @@
 #include "../include/RobotomyRequestForm.hpp"
+#include "../include/AForm.hpp"
 
 /*
 •RobotomyRequestForm: Required grades: sign 72, exec 45
@@ -6,16 +7,21 @@ Makes some drilling noises, then informs that <target> has been robotomized
 successfully 50% of the time. Otherwise, it informs that the robotomy failed.
 */
 
-RobotomyRequestForm::RobotomyRequestForm() {
+/*
+********************************************************************************************************************************************************************
+*/
+
+// Constructors and destructors:
+
+RobotomyRequestForm::RobotomyRequestForm() : AForm("RobotomyRequestForm", 72, 45), _target("default") {
     std::cout << "\nDefault constructor called for RobotomyRequestForm" << std::endl;
 }
 
-RobotomyRequestForm::RobotomyRequestForm(const std::string &target) {
+RobotomyRequestForm::RobotomyRequestForm(const std::string &target) : AForm("RobotomyRequestForm", 72, 45), _target(target) {
     std::cout << "\nConstructor with target called for RobotomyRequestForm" << std::endl;
-    (void)target;
 }
 
-RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &copy) {
+RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &copy) : AForm(copy), _target(copy._target) {
     std::cout << "\nCopy constructor called for RobotomyRequestForm" << std::endl;
     *this = copy;
 }
@@ -25,7 +31,6 @@ RobotomyRequestForm& RobotomyRequestForm::operator=(const RobotomyRequestForm &c
     if (&copy == this) {
         return *this;
     }
-    //this->_grade = copy._grade;
     return *this;
 }
 
@@ -33,8 +38,52 @@ RobotomyRequestForm::~RobotomyRequestForm() {
     std::cout << "\nDestructor called for RobotomyRequestForm" << std::endl;
 }
 
+/*
+********************************************************************************************************************************************************************
+*/
+
+// Getters and setters:
+
+const std::string RobotomyRequestForm::getTarget() const {
+    return this->_target;
+}
+
+//AForm getters
+
+const std::string RobotomyRequestForm::getAFormName() const {
+    return AForm::getName();
+}
+
+bool RobotomyRequestForm::getAFormSigned() const {
+    return AForm::getSigned();
+}
+
+int RobotomyRequestForm::getAFormSignGrade() const {
+    return AForm::getSignGrade();
+}
+
+int RobotomyRequestForm::getAFormExecGrade() const {
+    return AForm::getExecGrade();
+}
+
+/*
+********************************************************************************************************************************************************************
+*/
+
+void RobotomyRequestForm::execute(const Bureaucrat& executor) const {
+    AForm::execute(executor);
+    std::cout << "RobotomyRequestForm::execute() called" << std::endl;
+}
+
+void RobotomyRequestForm::executeAction() const {
+    std::cout << "Drilling noises..." << std::endl;
+}
+
+/*
+********************************************************************************************************************************************************************
+*/
+
 std::ostream& operator<<(std::ostream& os, RobotomyRequestForm const& rhs) {
-    (void)rhs;
-    os << "\n***RobotomyRequestForm:\n" << std::endl;
+    os << "\n***RobotomyRequestForm:\nTarget: " << rhs.getTarget() << std::endl;
     return os;
 }

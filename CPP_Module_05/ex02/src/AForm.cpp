@@ -3,9 +3,16 @@
 #include <iostream>
 #include <string>
 
+/*
+********************************************************************************************************************************************************************
+*/
+
+// Constructors and destructors:
+
 AForm::AForm() : _name("Officially Official AForm of Officialness"), _signGrade(150), _signed(false), execGrade(150) {
     std::cout << "\nDefault constructor called for AForm" << std::endl;
 }
+
 AForm::AForm(const std::string& name, int signGrade, int execGrade) : _name(name), _signGrade(150), _signed(false), execGrade(execGrade) {
     std::cout << "\nParameterized constructor called for AForm" << std::endl;
     if (signGrade < 1 || execGrade < 1) {
@@ -15,10 +22,12 @@ AForm::AForm(const std::string& name, int signGrade, int execGrade) : _name(name
         throw AForm::GradeTooLowException();
     }
 }
+
 AForm::AForm(const AForm& copy) : _name(copy._name), _signGrade(copy._signGrade), execGrade(copy.execGrade) {
     std::cout << "\nCopy constructor called for AForm" << std::endl;
     *this = copy;
 }
+
 AForm& AForm::operator=(const AForm& copy) {
     std::cout << "AForm assignation operator is called" << std::endl;
     if (&copy == this) {
@@ -27,11 +36,17 @@ AForm& AForm::operator=(const AForm& copy) {
     this->_signed = copy._signed;
     return *this;
 }
+
 AForm::~AForm() {
     std::cout << "\nDestructor called for AForm" << std::endl;
 }
 
+/*
+********************************************************************************************************************************************************************
+*/
+
 // Getters and setters:
+
 std::string AForm::getName() const {
     return this->_name;
 }
@@ -45,7 +60,16 @@ void AForm::setSigned(bool sign) {
     this->_signed = sign;
 }
 
+int AForm::getExecGrade() const {
+    return this->execGrade;
+}
+
+/*
+********************************************************************************************************************************************************************
+*/
+
 // Functions:
+
 void AForm::beSigned(const Bureaucrat& bureaucrat) {
     std::cout << "\nBureaucrat grade = " << bureaucrat.getGrade() << "; _signGrade = " << this->_signGrade << std::endl;
     if (bureaucrat.getGrade() <= 50) {
@@ -72,7 +96,12 @@ void AForm::executeAction() const {
     std::cout << "Executing action of AForm" << std::endl;
 }
 
+/*
+********************************************************************************************************************************************************************
+*/
+
 // Exceptions:
+
 const char* AForm::GradeTooHighException::what() const throw() {
     return "\nERROR: AForm grade too high\n";
 }
@@ -82,6 +111,10 @@ const char* AForm::GradeTooLowException::what() const throw() {
 const char* AForm::FormNotSignedException::what() const throw() {
     return "\nERROR: AForm not signed\n";
 }
+
+/*
+********************************************************************************************************************************************************************
+*/
 
 std::ostream& operator<<(std::ostream& os, AForm const& rhs) {
     os << "\n***AForm:\n" << "Name = " << rhs.getName() << "; Sign grade = " << rhs.getSignGrade() << "; AForm signed = " << (rhs.getSigned() ? "true" : "false") << std::endl;

@@ -1,10 +1,16 @@
 #include "../include/AForm.hpp"
 #include "../include/Bureaucrat.hpp"
 
+/*
+********************************************************************************************************************************************************************
+*/
+
 // Constructors and destructors:
+
 Bureaucrat::Bureaucrat() : _name("Default_Name"), _grade(150) {
     std::cout << "\nDefault constructor called for Bureaucrat" << std::endl;
 }
+
 Bureaucrat::Bureaucrat(std::string name, int grade) : _name(name) {
     std::cout << "\nConstructor with name and grade called for Bureaucrat" << std::endl;
     this->setGrade(grade);
@@ -28,13 +34,20 @@ Bureaucrat::~Bureaucrat() {
     std::cout << "\nDestructor called for Bureaucrat" << std::endl;
 }
 
+/*
+********************************************************************************************************************************************************************
+*/
+
 // Getters and setters:
+
 const std::string Bureaucrat::getName() const {
     return this->_name;
 }
+
 int Bureaucrat::getGrade() const {
     return this->_grade;
 }
+
 void Bureaucrat::setGrade(const int grade) {
     if (grade < 1) {
         throw Bureaucrat::GradeTooHighException();
@@ -43,6 +56,11 @@ void Bureaucrat::setGrade(const int grade) {
     }
     this->_grade = grade;
 }
+
+/*
+********************************************************************************************************************************************************************
+*/
+
 // Increment and decrement grade:
 void Bureaucrat::incrementGrade() {
     std::cout << "\nIncrementing grade" << std::endl;
@@ -68,6 +86,10 @@ void Bureaucrat::signForm(AForm &form) const {
     form.beSigned(*this);
 }
 
+/*
+********************************************************************************************************************************************************************
+*/
+
 // User-defined exception classes:
 const char* Bureaucrat::GradeTooHighException::what() const throw() {
     return "\nERROR: Grade too high\n";
@@ -76,6 +98,10 @@ const char* Bureaucrat::GradeTooHighException::what() const throw() {
 const char* Bureaucrat::GradeTooLowException::what() const throw() {
     return "\nERROR: Grade too low\n";
 }
+
+/*
+********************************************************************************************************************************************************************
+*/
 
 // Overload << operator:
 std::ostream& operator<<(std::ostream& os, Bureaucrat const& rhs) {
