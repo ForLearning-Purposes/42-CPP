@@ -79,6 +79,10 @@ void RobotomyRequestForm::executeAction() const {
     std::cout << "Drilling noises..." << std::endl;
 }
 
+void RobotomyRequestForm::printAForm() const {
+    AForm::printForm();
+}
+
 /*
 ********************************************************************************************************************************************************************
 */

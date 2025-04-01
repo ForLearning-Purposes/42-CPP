@@ -13,7 +13,7 @@ AForm::AForm() : _name("Officially Official AForm of Officialness"), _signGrade(
     std::cout << "\nDefault constructor called for AForm" << std::endl;
 }
 
-AForm::AForm(const std::string& name, int signGrade, int execGrade) : _name(name), _signGrade(150), _signed(false), execGrade(execGrade) {
+AForm::AForm(const std::string& name, int signGrade, int execGrade) : _name(name), _signGrade(signGrade), _signed(false), execGrade(execGrade) {
     std::cout << "\nParameterized constructor called for AForm" << std::endl;
     if (signGrade < 1 || execGrade < 1) {
         throw AForm::GradeTooHighException();
@@ -94,6 +94,10 @@ void AForm::execute(const Bureaucrat& executor) const {
 
 void AForm::executeAction() const {
     std::cout << "Executing action of AForm" << std::endl;
+}
+
+void AForm::printForm() const {
+    std::cout << *this << std::endl;
 }
 
 /*

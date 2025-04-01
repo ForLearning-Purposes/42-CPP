@@ -10,41 +10,108 @@ int main()
 {
     try {
         {
-            std::cout << "*********ShrubberyCreationForm:" << std::endl;
-            
+            /*
+            ********************************************************************************************************************
+            */
+            // std::cout << "*********SHRUBBERYCREATIONFORM:" << std::endl;
+            // {
+            //     ShrubberyCreationForm shrubberyForm;
+            //     std::cout << std::endl;
+            //     std::cout << "Form Name: " << shrubberyForm.getAFormName() << std::endl;
+            //     std::cout << "Exec Grade: " << shrubberyForm.getAFormExecGrade() << std::endl;
+            //     std::cout << "Sign Grade: " << shrubberyForm.getAFormSignGrade() << std::endl;
+            //     std::cout << "Target: " << shrubberyForm.getTarget() << std::endl;
+            //     shrubberyForm.printAForm();
+            // }
+            // std::cout << "\n\n*********ROBOTOMYREQUESTFORM:" << std::endl;
+            // {
+            //     RobotomyRequestForm RobotomyForm;
+            //     std::cout << std::endl;
+            //     std::cout << "Form Name: " << RobotomyForm.getAFormName() << std::endl;
+            //     std::cout << "Exec Grade: " << RobotomyForm.getAFormExecGrade() << std::endl;
+            //     std::cout << "Sign Grade: " << RobotomyForm.getAFormSignGrade() << std::endl;
+            //     std::cout << "Target: " << RobotomyForm.getTarget() << std::endl;
+            //     RobotomyForm.printAForm();
+            // }
+            // std::cout << "\n\n*********PRESIDENTIALPARDONFORM:" << std::endl;
+            // {
+            //     PresidentialPardonForm PresidentialForm;
+            //     std::cout << std::endl;
+            //     std::cout << "Form Name: " << PresidentialForm.getAFormName() << std::endl;
+            //     std::cout << "Exec Grade: " << PresidentialForm.getAFormExecGrade() << std::endl;
+            //     std::cout << "Sign Grade: " << PresidentialForm.getAFormSignGrade() << std::endl;
+            //     std::cout << "Target: " << PresidentialForm.getTarget() << std::endl;
+            //     PresidentialForm.printAForm();
+            // }
+            /*
+            ********************************************************************************************************************
+            */
+            // std::cout << "*********SHRUBBERYCREATIONFORM:" << std::endl;
+            // {
+            //     ShrubberyCreationForm shrubberyForm("home1");
+            //     std::cout << std::endl;
+            //     std::cout << "Form Name: " << shrubberyForm.getAFormName() << std::endl;
+            //     std::cout << "Exec Grade: " << shrubberyForm.getAFormExecGrade() << std::endl;
+            //     std::cout << "Sign Grade: " << shrubberyForm.getAFormSignGrade() << std::endl;
+            //     std::cout << "Target: " << shrubberyForm.getTarget() << std::endl;
+            //     shrubberyForm.printAForm();
+            // }
+            // std::cout << "\n\n*********ROBOTOMYREQUESTFORM:" << std::endl;
+            // {
+            //     RobotomyRequestForm RobotomyForm("home2");
+            //     std::cout << std::endl;
+            //     std::cout << "Form Name: " << RobotomyForm.getAFormName() << std::endl;
+            //     std::cout << "Exec Grade: " << RobotomyForm.getAFormExecGrade() << std::endl;
+            //     std::cout << "Sign Grade: " << RobotomyForm.getAFormSignGrade() << std::endl;
+            //     std::cout << "Target: " << RobotomyForm.getTarget() << std::endl;
+            //     RobotomyForm.printAForm();
+            // }
+            // std::cout << "\n\n*********PRESIDENTIALPARDONFORM:" << std::endl;
+            // {
+            //     PresidentialPardonForm PresidentialForm("home3");
+            //     std::cout << std::endl;
+            //     std::cout << "Form Name: " << PresidentialForm.getAFormName() << std::endl;
+            //     std::cout << "Exec Grade: " << PresidentialForm.getAFormExecGrade() << std::endl;
+            //     std::cout << "Sign Grade: " << PresidentialForm.getAFormSignGrade() << std::endl;
+            //     std::cout << "Target: " << PresidentialForm.getTarget() << std::endl;
+            //     PresidentialForm.printAForm();
+            // }
+            /*
+            ********************************************************************************************************************
+            */
+            std::cout << "*********SHRUBBERYCREATIONFORM:" << std::endl;
             {
-                ShrubberyCreationForm shrubberyForm;
+                ShrubberyCreationForm shrubberyForm("home1");
                 std::cout << std::endl;
-                std::cout << "HERE: " << shrubberyForm.getAFormName() << std::endl;
-                std::cout << "HERE1: " << shrubberyForm.getAFormExecGrade() << std::endl;
-                
+                std::cout << "Form Name: " << shrubberyForm.getAFormName() << std::endl;
+                std::cout << "Exec Grade: " << shrubberyForm.getAFormExecGrade() << std::endl;
+                std::cout << "Sign Grade: " << shrubberyForm.getAFormSignGrade() << std::endl;
+                std::cout << "Target: " << shrubberyForm.getTarget() << std::endl;
+                shrubberyForm.printAForm();
             }
-            std::cout << "\n*********PresidentialPardonForm:" << std::endl;
+            std::cout << "\n\n*********ROBOTOMYREQUESTFORM:" << std::endl;
             {
-                PresidentialPardonForm presidentialForm;
+                RobotomyRequestForm RobotomyForm("home2");
                 std::cout << std::endl;
+                std::cout << "Form Name: " << RobotomyForm.getAFormName() << std::endl;
+                std::cout << "Exec Grade: " << RobotomyForm.getAFormExecGrade() << std::endl;
+                std::cout << "Sign Grade: " << RobotomyForm.getAFormSignGrade() << std::endl;
+                std::cout << "Target: " << RobotomyForm.getTarget() << std::endl;
+                RobotomyForm.printAForm();
             }
-            std::cout << "\n*********RobotomyRequestForm:" << std::endl;
+            std::cout << "\n\n*********PRESIDENTIALPARDONFORM:" << std::endl;
             {
-                RobotomyRequestForm presidentialForm;
+                PresidentialPardonForm PresidentialForm("home3");
                 std::cout << std::endl;
+                std::cout << "Form Name: " << PresidentialForm.getAFormName() << std::endl;
+                std::cout << "Exec Grade: " << PresidentialForm.getAFormExecGrade() << std::endl;
+                std::cout << "Sign Grade: " << PresidentialForm.getAFormSignGrade() << std::endl;
+                std::cout << "Target: " << PresidentialForm.getTarget() << std::endl;
+                PresidentialForm.printAForm();
             }
-            // Bureaucrat bureaucrat("John", 1);
-            // std::cout << bureaucrat << std::endl;
-
-            // std::cout << std::endl;
-            // std::cout << std::endl;
-            // std::cout << std::endl;
-
-
-            // PresidentialPardonForm presidentialForm("Target1");
-            // std::cout << presidentialForm << std::endl;
-
-            // RobotomyRequestForm robotomyForm("Target2");
-            // std::cout << robotomyForm << std::endl;
-
-            // ShrubberyCreationForm shrubberyForm("Target3");
-            // std::cout << shrubberyForm << std::endl;
+            /*
+            ********************************************************************************************************************
+            */
         }
     } catch (const std::exception& e) {
         std::cerr << "Exception: " << e.what() << std::endl;

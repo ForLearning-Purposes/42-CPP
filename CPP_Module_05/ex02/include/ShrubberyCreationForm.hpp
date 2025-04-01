@@ -24,10 +24,12 @@ class ShrubberyCreationForm : public AForm {
         int                 getAFormSignGrade() const;
         int                 getAFormExecGrade() const;
 
-        void execute(const Bureaucrat& executor) const;
-        void executeAction() const;
+        void                execute(const Bureaucrat& executor) const;
+        void                executeAction() const;
+        void                printAForm() const;
     
     private:
+
         const std::string _target;
 
 };

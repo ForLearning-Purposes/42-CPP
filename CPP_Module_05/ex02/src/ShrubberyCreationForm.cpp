@@ -84,6 +84,10 @@ void ShrubberyCreationForm::executeAction() const {
     // Here you would create the file and write the ASCII trees to it
 }
 
+void ShrubberyCreationForm::printAForm() const {
+    AForm::printForm();
+}
+
 /*
 ********************************************************************************************************************************************************************
 */

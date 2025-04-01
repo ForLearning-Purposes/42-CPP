@@ -79,6 +79,10 @@ void PresidentialPardonForm::executeAction() const {
     std::cout << this->_target << " has been pardoned by Zaphod Beeblebrox." << std::endl;
 }
 
+void PresidentialPardonForm::printAForm() const {
+    AForm::printForm();
+}
+
 /*
 ********************************************************************************************************************************************************************
 */
