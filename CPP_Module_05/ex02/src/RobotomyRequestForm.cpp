@@ -1,5 +1,7 @@
 #include "../include/RobotomyRequestForm.hpp"
+#include "../include/Bureaucrat.hpp"
 #include "../include/AForm.hpp"
+#include <cstdlib>
 
 /*
 •RobotomyRequestForm: Required grades: sign 72, exec 45
@@ -72,11 +74,22 @@ int RobotomyRequestForm::getAFormExecGrade() const {
 
 void RobotomyRequestForm::execute(const Bureaucrat& executor) const {
     AForm::execute(executor);
-    std::cout << "RobotomyRequestForm::execute() called" << std::endl;
+    if (executor.getGrade() > AForm::getExecGrade()) {
+        std::cout << executor.getName() << " couldn't execute " << this->getAFormName() << std::endl;
+        return;
+    }
+    executeAction();
 }
 
 void RobotomyRequestForm::executeAction() const {
     std::cout << "Drilling noises..." << std::endl;
+    srand(time(0));
+    int random = rand() % 2;
+    if (random == 0) {
+        std::cout << this->_target << " has been robotomized successfully!" << std::endl;
+    } else {
+        std::cout << "Robotomy failed for " << this->_target << "." << std::endl;
+    }
 }
 
 void RobotomyRequestForm::printAForm() const {

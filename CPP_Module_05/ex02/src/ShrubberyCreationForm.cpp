@@ -1,6 +1,9 @@
 #include "../include/ShrubberyCreationForm.hpp"
+#include "../include/Bureaucrat.hpp"
 #include "../include/AForm.hpp"
 #include <string>
+#include <iostream>
+#include <fstream>
 
 /*
 •ShrubberyCreationForm: Required grades: sign 145, exec 137
@@ -74,18 +77,39 @@ int ShrubberyCreationForm::getAFormExecGrade() const {
 ********************************************************************************************************************************************************************
 */
 
+void ShrubberyCreationForm::printAForm() const {
+    AForm::printForm();
+}
+
 void ShrubberyCreationForm::execute(const Bureaucrat& executor) const {
     AForm::execute(executor);
-    std::cout << "ShrubberyCreationForm::execute() called" << std::endl;
+    if (executor.getGrade() > AForm::getExecGrade()) {
+        std::cout << executor.getName() << " couldn't execute " << this->getAFormName() << std::endl;
+        return;
+    }
+    executeAction();
 }
 
 void ShrubberyCreationForm::executeAction() const {
     std::cout << "Creating shrubbery in " << this->_target << "_shrubbery" << std::endl;
-    // Here you would create the file and write the ASCII trees to it
-}
-
-void ShrubberyCreationForm::printAForm() const {
-    AForm::printForm();
+    
+    std::string fileName = this->getTarget() + "_shrubbery";
+    std::ofstream file(fileName.c_str(), std::ios::out);
+    if (file.fail()) {
+        std::cerr << "Error creating file" << std::endl;
+        return;
+    }
+    //ASCII tree
+    file << "      ^            ^            ^            ^      \n";
+    file << "     ^^^          ^^^          ^^^          ^^^     \n";
+    file << "    ^^^^^        ^^^^^        ^^^^^        ^^^^^    \n";
+    file << "   ^^^^^^^      ^^^^^^^      ^^^^^^^      ^^^^^^^   \n";
+    file << "  ^^^^^^^^^    ^^^^^^^^^    ^^^^^^^^^    ^^^^^^^^^  \n";
+    file << " ^^^^^^^^^^^  ^^^^^^^^^^^  ^^^^^^^^^^^  ^^^^^^^^^^^ \n";
+    file << "      |            |            |            |      \n";
+    file << "      |            |            |            |      \n";
+    file << "                  Have a nice day!                  \n";
+    file.close();
 }
 
 /*

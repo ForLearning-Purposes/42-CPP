@@ -1,5 +1,6 @@
 #include "../include/PresidentialPardonForm.hpp"
 #include "../include/AForm.hpp"
+#include "../include/Bureaucrat.hpp"
 
 /*
 •PresidentialPardonForm: Required grades: sign 25, exec 5
@@ -70,17 +71,21 @@ int PresidentialPardonForm::getAFormExecGrade() const {
 ********************************************************************************************************************************************************************
 */
 
+void PresidentialPardonForm::printAForm() const {
+    AForm::printForm();
+}
+
 void PresidentialPardonForm::execute(const Bureaucrat& executor) const {
     AForm::execute(executor);
-    std::cout << "PresidentialPardonForm::execute() called" << std::endl;
+    if (executor.getGrade() > AForm::getExecGrade()) {
+        std::cout << executor.getName() << " couldn't execute " << this->getAFormName() << std::endl;
+        return;
+    }
+    executeAction();
 }
 
 void PresidentialPardonForm::executeAction() const {
     std::cout << this->_target << " has been pardoned by Zaphod Beeblebrox." << std::endl;
-}
-
-void PresidentialPardonForm::printAForm() const {
-    AForm::printForm();
 }
 
 /*

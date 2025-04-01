@@ -15,10 +15,10 @@ AForm::AForm() : _name("Officially Official AForm of Officialness"), _signGrade(
 
 AForm::AForm(const std::string& name, int signGrade, int execGrade) : _name(name), _signGrade(signGrade), _signed(false), execGrade(execGrade) {
     std::cout << "\nParameterized constructor called for AForm" << std::endl;
-    if (signGrade < 1 || execGrade < 1) {
+    if (this->_signGrade < 1 || this->execGrade < 1) {
         throw AForm::GradeTooHighException();
     }
-    else if (signGrade > 150 || execGrade > 150) {
+    else if (this->_signGrade > 150 || this->execGrade > 150) {
         throw AForm::GradeTooLowException();
     }
 }
@@ -71,8 +71,8 @@ int AForm::getExecGrade() const {
 // Functions:
 
 void AForm::beSigned(const Bureaucrat& bureaucrat) {
-    std::cout << "\nBureaucrat grade = " << bureaucrat.getGrade() << "; _signGrade = " << this->_signGrade << std::endl;
-    if (bureaucrat.getGrade() <= 50) {
+    std::cout << "\nBureaucrat grade = " << bureaucrat.getGrade() << "; _signGrade = " << this->_signGrade << "; Exec Grade = " << this->execGrade << std::endl;
+    if (bureaucrat.getGrade() <= this->_signGrade) {
         std::cout << bureaucrat.getName() << " signed " << this->_name << std::endl;
         this->_signed = true;
     }
@@ -83,13 +83,12 @@ void AForm::beSigned(const Bureaucrat& bureaucrat) {
 }
 
 void AForm::execute(const Bureaucrat& executor) const {
+    (void)executor; // To avoid unused parameter warning
     if (!this->_signed) {
         throw AForm::FormNotSignedException();
     }
-    if (executor.getGrade() > this->execGrade) {
-        throw AForm::GradeTooLowException();
-    }
-    this->executeAction();
+    // Check if the bureaucrat's grade is high enough to execute the form
+    //this->executeAction();
 }
 
 void AForm::executeAction() const {
