@@ -6,6 +6,10 @@
 
 class Bureaucrat; // Forward declaration of Bureaucrat class
 
+/*
+********************************************************************************************************************************************************************
+*/
+
 class Form {
     public:
         //constructors and destructors
@@ -26,15 +30,25 @@ class Form {
         std::string getName() const;
         bool        getSigned() const;
         int         getSignGrade() const;
+        int         getExecGrade() const;
         void        setSigned(bool sign);
         //functions
         void        beSigned(const Bureaucrat& bureaucrat);
     private:
         const       std::string _name;
         const       int _signGrade;
+        const       int _execGrade;
         bool        _signed;
 };
 
+/*
+********************************************************************************************************************************************************************
+*/
+
 std::ostream& operator<<(std::ostream& os, Form const& rhs);
+
+/*
+********************************************************************************************************************************************************************
+*/
 
 #endif

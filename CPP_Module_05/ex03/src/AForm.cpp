@@ -83,11 +83,13 @@ void AForm::beSigned(const Bureaucrat& bureaucrat) {
 }
 
 void AForm::execute(const Bureaucrat& executor) const {
-    (void)executor; // To avoid unused parameter warning
     if (!this->_signed) {
         throw AForm::FormNotSignedException();
     }
-    // Check if the bureaucrat's grade is high enough to execute the form
+    if (executor.getGrade() > this->execGrade) {
+        std::cout << executor.getName() << " couldn't execute " << this->_name << std::endl;
+        throw AForm::GradeTooLowException();
+    }
     //this->executeAction();
 }
 

@@ -1,5 +1,9 @@
 #include "Bureaucrat.hpp"
 
+/*
+********************************************************************************************************************************************************************
+*/
+
 // Constructors and destructors:
 Bureaucrat::Bureaucrat() : _name("default"), _grade(150) {}
 
@@ -17,12 +21,15 @@ Bureaucrat& Bureaucrat::operator=(const Bureaucrat& copy) {
     if (&copy == this) {
         return *this;
     }
-    // this->_name = copy._name; how to copy const std::string? ^
     this->_grade = copy._grade;
     return *this;
 }
 
 Bureaucrat::~Bureaucrat() {}
+
+/*
+********************************************************************************************************************************************************************
+*/
 
 // Getters and setters:
 const std::string Bureaucrat::getName() const {
@@ -41,6 +48,10 @@ void Bureaucrat::setGrade(const int grade) {
     }
     this->_grade = grade;
 }
+
+/*
+********************************************************************************************************************************************************************
+*/
 
 // Increment and decrement grade:
 void Bureaucrat::incrementGrade() {
@@ -63,6 +74,10 @@ void Bureaucrat::decrementGrade() {
     std::cout << "New grade: " << this->_grade << "\n" << std::endl;
 }
 
+/*
+********************************************************************************************************************************************************************
+*/
+
 // User-defined exception classes:
 const char* Bureaucrat::GradeTooHighException::what() const throw() {
     return "\nERROR: Grade too high\n";
@@ -72,7 +87,10 @@ const char* Bureaucrat::GradeTooLowException::what() const throw() {
     return "\nERROR: Grade too low\n";
 }
 
-// Overload << operator:
+/*
+********************************************************************************************************************************************************************
+*/
+
 std::ostream& operator<<(std::ostream& os, Bureaucrat const& rhs) {
     os << rhs.getName() << ", bureaucrat grade " << rhs.getGrade() << std::endl;
     return os;
