@@ -3,7 +3,10 @@
 
 #include <iostream>
 
-
+// Only one static method "convert"
+// As this class doesn’t need to store anything at all, it must not be instantiable by users
+// You have to handle these pseudo-literals as well -inf(f), +inf(f), and nan(f)
+//
 class ScalarConverter {
     public:
         ScalarConverter();
@@ -12,12 +15,15 @@ class ScalarConverter {
         ~ScalarConverter();
 
         static void convert(const std::string &input);
+        void checkinput(const std::string &input);
+        bool isInt(const std::string& str);
+        
         void printChar(char c);
         void printInt(int i);
         void printFloat(float f);
-        void printDouble(double d);
-    private:
-
+        void printDouble(double d);    
+    // private:
+    // 
 };
 
 #endif

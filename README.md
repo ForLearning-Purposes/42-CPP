@@ -83,3 +83,20 @@
     - 
     #### Exceptions
     - 
+---
+### Module 06
+- C++ casts
+    #### C++ casts
+    - In C++, casts are used to convert one data type to another. C++ provides several types of casting mechanisms to ensure that data is converted between types safely and correctly. Each type of cast has its specific use case
+        - C-style Cast -> Basic, generic cast. Can be unsafe.
+            - float x = (float)intVar;
+        - static_cast -> This is the most commonly used cast in C++ and is generally safer than the C-style cast. It's used for conversions between related types, such as from one numeric type to another, or between class hierarchies when there’s a clear relationship
+            - int i = static_cast<int>(floatVar);
+        - dynamic_cast -> This is used for safe downcasting in class hierarchies, specifically with polymorphic types (i.e., when a class has at least one virtual function). It checks the type at runtime and returns nullptr (for pointers) or throws an exception (for references) if the cast is invalid
+            - Derived* d = dynamic_cast<Derived*>(basePtr);
+        - const_cast -> This is used to add or remove the const qualifier from a variable. It's useful when you need to cast away constness from an object or pointer, though this should be done carefully because modifying a const object is undefined behavior
+            - int* ptr = const_cast<int*>(&constVar);
+        - reinterpret_cast -> This is the most dangerous type of cast and should be used sparingly. It forces a reinterpretation of the binary representation of the data, treating it as another type. This is low-level casting and doesn't perform any safety checks.
+            - char* ptr = reinterpret_cast<char*>(intPtr);
+    #### Scalar types
+    - Scalar type refers to a data type that can hold a single value, such as an integer, floating-point number, or a character.
