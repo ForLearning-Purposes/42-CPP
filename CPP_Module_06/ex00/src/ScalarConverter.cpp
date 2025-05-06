@@ -33,7 +33,7 @@ void ScalarConverter::convert(const std::string &input) {
 void ScalarConverter::checkinput(const std::string &input) {
     std::cout << std::endl;
     std::cout << "***Checking input: " << input << std::endl;
-    if (input.length() == 1 && !isdigit(input[0])) {
+    if (isChar(input)) {
         char c = input[0];
         std::cout << "Input is a char: " << c << std::endl;
         printChar(c);
@@ -43,12 +43,27 @@ void ScalarConverter::checkinput(const std::string &input) {
         std::cout << "Input is an int: " << num << std::endl;
         // - or + sign can be at the start of the string only
     }
+    else if (isFloat(input)) {
+        std::cout << "HERE" << std::endl;
+    }
     else {
         std::cout << "INPUT IS NOT A CHAR OR INT" << std::endl;
     }
 }
 
+// Check if the string length is 1 and the first character is a printable character
+bool ScalarConverter::isChar(const std::string& str) {
+    if (str.length() == 1 && isprint(str[0]) && !isdigit(str[0])) {
+        return true;
+    }
+    else {
+        std::cout << "\nINPUT IS NOT A CHAR" << std::endl;
+    }
+    return false;
+}
+
 bool ScalarConverter::isInt(const std::string& str) {
+    // check that int is not avove or below the limits
     for (std::string::const_iterator it = str.begin(); it != str.end(); ++it) {
         if (!isdigit(*it)) {  // If any character is not a digit
             if (*it == '-' || *it == '+') {
@@ -56,11 +71,50 @@ bool ScalarConverter::isInt(const std::string& str) {
                     return false;         // Return false immediately
                 }
             }
-            else
+            else {
+                std::cout << "\nINPUT IS NOT AN INT" << std::endl;
                 return false;  // Return false if any character is not a digit
+            }
         }
+        
     }
     return true;  // All characters are digits
+}
+
+// Check if the string is a valid float
+bool ScalarConverter::isFloat(const std::string& str) {
+    std::cout << "Checking if float: " << str << std::endl;
+    if (str.c_str()[str.length() - 1] == 'f' && str.c_str()[str.length()] == '\0') {
+        if (str == "-inf" || str == "+inf" || str == "nan") {
+            std::cout << "\nINPUT IS A FLOAT" << std::endl;
+            return true;
+        }
+        size_t i = 0;
+        if (str[i] == '-' || str[i] == '+') {
+            i++;
+        }
+        int dotCount = 0;
+        while (i < str.length()) {
+            if (str.c_str()[i] == '.' && isdigit(str.c_str()[i + 1])) {
+                i++;
+                dotCount++;
+            }
+            else if (isdigit(str.c_str()[i])) {
+                i++;
+            }
+            else {
+                std::cout << "\nINPUT IS NOT A FLOAT" << std::endl;
+                return false;  // Return false if any character is not a digit  
+            }
+        }
+        if (dotCount > 1) {
+            std::cout << "\nINPUT IS NOT A FLOAT" << std::endl;
+            return false;  // More than one dot is not valid
+        }
+        std::cout << "\nINPUT IS A FLOAT" << std::endl;
+        return true;
+    }
+    return false; 
 }
 
 void ScalarConverter::printChar(char c) {

@@ -17,6 +17,8 @@ class ScalarConverter {
         static void convert(const std::string &input);
         void checkinput(const std::string &input);
         bool isInt(const std::string& str);
+        bool isChar(const std::string& str);
+        bool isFloat(const std::string& str);
         
         void printChar(char c);
         void printInt(int i);
