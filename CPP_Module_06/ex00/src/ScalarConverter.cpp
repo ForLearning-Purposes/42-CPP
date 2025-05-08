@@ -46,8 +46,11 @@ void ScalarConverter::checkinput(const std::string &input) {
     else if (isFloat(input)) {
         std::cout << "HERE" << std::endl;
     }
+    else if (isDouble(input)) {
+        std::cout << "HERE2" << std::endl;
+    }
     else {
-        std::cout << "INPUT IS NOT A CHAR OR INT" << std::endl;
+        std::cout << "INPUT IS NOT A SCALAR TYPE" << std::endl;
     }
 }
 
@@ -115,6 +118,11 @@ bool ScalarConverter::isFloat(const std::string& str) {
         return true;
     }
     return false; 
+}
+
+bool ScalarConverter::isDouble(const std::string& str) {
+    std::cout << "Checking if double: " << str << std::endl;
+    return false;  // Placeholder for double check
 }
 
 void ScalarConverter::printChar(char c) {
