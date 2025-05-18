@@ -24,9 +24,9 @@ class ScalarConverter {
         void printChar(char c);
         void printInt(int i);
         void printFloat(float f);
-        void printDouble(double d);    
+        void printDouble(double d);
     // private:
-    // 
+    
 };
 
 #endif
