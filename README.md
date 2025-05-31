@@ -98,5 +98,9 @@
             - int* ptr = const_cast<int*>(&constVar);
         - reinterpret_cast -> This is the most dangerous type of cast and should be used sparingly. It forces a reinterpretation of the binary representation of the data, treating it as another type. This is low-level casting and doesn't perform any safety checks.
             - char* ptr = reinterpret_cast<char*>(intPtr);
+    ### NOTES:
     #### Scalar types
     - Scalar type refers to a data type that can hold a single value, such as an integer, floating-point number, or a character.
+    #### uintptr_t
+    - It's an unsigned integer type that is guaranteed to be able to hold a pointer.
+    - You’re using this to demonstrate that you can safely "store" a pointer as a number and retrieve it back.
