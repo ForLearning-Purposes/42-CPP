@@ -16,3 +16,5 @@ int main() {
         std::cerr << "Exception caught: " << e.what() << std::endl;
     }
 }
+
+// https://github.com/BaBreton/42-CPP/blob/main/module07/ex02/src/main.cpp
