@@ -32,8 +32,17 @@ class Array {
         Array(const Array &src);
         Array &operator=(const Array &rhs);
         ~Array();
+
         unsigned int getSize() const;
         T *getElements() const;
+
+        T &operator[](unsigned int index);
+        const T &operator[](unsigned int index) const;
+
+        class OutOfBoundsException : public std::exception {
+            public:
+                virtual const char *what() const throw();
+        };
 
     private:
         T *_elements;

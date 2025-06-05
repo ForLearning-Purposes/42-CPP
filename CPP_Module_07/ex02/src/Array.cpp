@@ -79,3 +79,28 @@ std::ostream &operator<<(std::ostream &os, const Array<T> &array) {
 /*
 *************************************************
 */
+
+template <typename T>
+T &Array<T>::operator[](unsigned int index) {
+    if (index >= _size) {
+        throw std::out_of_range("Index out of bounds");
+    }
+    return _elements[index];
+}
+
+template <typename T>
+const T &Array<T>::operator[](unsigned int index) const {
+    if (index >= _size) {
+        throw std::out_of_range("Index out of bounds");
+    }
+    return _elements[index];
+}
+
+/*
+*************************************************
+*/
+
+template <typename T>
+const char* Array<T>::OutOfBoundsException::what() const throw() {
+    return ("Index out of bounds");
+}
