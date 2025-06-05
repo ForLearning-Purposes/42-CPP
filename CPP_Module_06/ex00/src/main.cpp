@@ -9,5 +9,6 @@ int main(int ac, char **av)
         return 1;
     }
     ScalarConverter::convert(av[1]); // To call function without creating an object is called static function.
+    //ScalarConverter converter;
     return 0;
 }

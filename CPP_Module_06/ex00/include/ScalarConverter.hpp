@@ -9,11 +9,6 @@
 //
 class ScalarConverter {
     public:
-        ScalarConverter();
-        ScalarConverter(const ScalarConverter &src);
-        ScalarConverter &operator=(const ScalarConverter &rhs);
-        ~ScalarConverter();
-
         static void convert(const std::string &input);
         void checkinput(const std::string &input);
         bool isInt(const std::string& str);
@@ -25,7 +20,12 @@ class ScalarConverter {
         void printInt(int i);
         void printFloat(float f);
         void printDouble(double d);
-    // private:
+
+    private:
+        ScalarConverter();
+        ScalarConverter(const ScalarConverter &src);
+        ScalarConverter &operator=(const ScalarConverter &rhs);
+        ~ScalarConverter();
     
 };
 

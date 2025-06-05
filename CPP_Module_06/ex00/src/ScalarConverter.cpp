@@ -10,7 +10,7 @@ ScalarConverter::ScalarConverter(const ScalarConverter &src) {*this = src;}
 
 ScalarConverter &ScalarConverter::operator=(const ScalarConverter &rhs) {
     if (this != &rhs) {
-        // Copy assignment logic here
+        // Nothing to copy as there are no member variables
     }
     return *this;
 }

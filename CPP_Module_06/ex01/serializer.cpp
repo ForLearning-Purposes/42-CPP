@@ -8,7 +8,8 @@ Serializer::Serializer(const Serializer &src) {*this = src;}
 
 Serializer &Serializer::operator=(const Serializer &rhs) {
     if (this != &rhs) {
-        // Copy assignment logic here
+        // No specific members to copy in this case, as Serializer has no data members
+        // This is just a placeholder for consistency with the rule of three
     }
     return *this;
 }
