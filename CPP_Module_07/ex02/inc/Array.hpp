@@ -32,9 +32,13 @@ class Array {
         Array(const Array &src);
         Array &operator=(const Array &rhs);
         ~Array();
+        unsigned int getSize() const;
+        T *getElements() const;
 
+    private:
+        T *_elements;
+        unsigned int _size;
 
-
-}
+};
 
 #endif
