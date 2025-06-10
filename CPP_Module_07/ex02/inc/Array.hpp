@@ -23,6 +23,8 @@ your tests.
 */
 
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
 
 template <typename T>
 class Array {
@@ -49,5 +51,7 @@ class Array {
         unsigned int _size;
 
 };
+
+#include "../template/Array.tpp"
 
 #endif
