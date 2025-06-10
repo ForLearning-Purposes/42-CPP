@@ -1,0 +1,4 @@
+FLOAT: -inff, +inff or nanf
+DOUBLE: -inf, +inf or nan
+
+don't forget to make it in canonical form later
