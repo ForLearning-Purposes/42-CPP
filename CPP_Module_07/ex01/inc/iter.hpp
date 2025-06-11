@@ -19,6 +19,9 @@ template <typename T>
 void iter(T *array, size_t length, void (*func)(T &anyElem));
 
 template <typename T>
+void iter(const T *array, size_t length, void (*func)(const T &anyElem));
+
+template <typename T>
 void printElement(T &elem);
 
 #endif
