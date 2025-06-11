@@ -11,6 +11,8 @@ Turn in a main.cpp file that contains your tests. Provide enough code to generat
 test executable.
 Your iter function template must work with any type of array. The third parameter
 can be an instantiated function template.
+Think carefully about how to support both const and non-const
+elements in your iter function.
 */
 
 template <typename T>

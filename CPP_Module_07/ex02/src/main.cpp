@@ -79,6 +79,26 @@ int main(int, char**)
             numbers[i] = rand();
         }
         delete [] mirror;//
-        return 0;
     }
+    {
+        std::cout << "__________________________________________________\n" << std::endl;
+        //Test: Construction by copy and assignment operator. In both cases, modifying either the
+        //original array or its copy after copying musn’t affect the other array.
+        std::cout << "\n*****Test Default constructor\n" << std::endl;
+        Array<int> array1(10);
+        std::cout << "Original array1: " << array1 << std::endl;
+        for (int i = 0; i < 10; ++i) {
+            array1[i] = i * 2; // Initialize with some values
+        }
+        std::cout << "Initialized array1: " << array1 << std::endl;
+        std::cout << "__________________________________________________\n" << std::endl;
+        std::cout << "\n*****Test Copy constructor\n" << std::endl;
+        Array<int> array2(array1); // Copy constructor
+        std::cout << "Copied array2 from array1: " << array2 << std::endl;
+        array2[0] = 100; // Modify array2
+        std::cout << "Modified array2: " << array2 << std::endl;
+        std::cout << "Original array1 after modifying array2: " << array1 << std::endl;
+        std::cout << "__________________________________________________\n" << std::endl;
+    }
+    return 0;
 }
