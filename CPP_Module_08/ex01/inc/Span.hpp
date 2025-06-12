@@ -1,7 +1,10 @@
 #ifndef SPAN_HPP
 #define SPAN_HPP
 
+#include <iostream>
 #include <vector>
+#include <algorithm>
+#include <stdexcept>
 
 /*
 Test your Span with at least 10,000 numbers.
@@ -17,6 +20,7 @@ class Span {
         unsigned int longestSpan() const;
     private:
         std::vector<int> _numbers;
+        unsigned int _maxSize;
 };
 
 #endif
