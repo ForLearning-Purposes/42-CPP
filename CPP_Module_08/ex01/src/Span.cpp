@@ -1,6 +1,25 @@
 #include "../inc/Span.hpp"
 
+Span::Span() : _maxSize(0) {}
+
 Span::Span(unsigned int N) : _maxSize(N) {}
+
+Span::Span(const Span& other) : _numbers(other._numbers) {
+    *this = other;
+}
+
+Span& Span::operator=(const Span& other) {
+    if (this != &other) {
+        _maxSize = other._maxSize;
+    }
+    return *this;
+}
+
+Span::~Span() {
+    std::cout << "Span destructor called." << std::endl;
+    _numbers.clear();
+    _maxSize = 0;
+}
 //_________________________________________________________
 
 /*

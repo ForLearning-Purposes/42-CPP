@@ -41,4 +41,15 @@ int main() {
         sp.shortestSpan();
         sp.longestSpan();
     }
+    {
+        //deep copy test
+        /* Span span1(5);
+        span1.addNumber(6);
+        span1.addNumber(3);
+        span1.addNumber(17);
+        span1.addNumber(9);
+        span1.addNumber(11);
+        Span span2(span1); // Copy constructor
+        std::cout << "Span 2 (copied from Span 1): " << span2 << std::endl; */
+    }
 }

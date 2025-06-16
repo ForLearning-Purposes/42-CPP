@@ -13,7 +13,11 @@ More would be even better.
 */
 class Span {
     public:
+        Span();
         Span(unsigned int N);
+        Span(const Span& other);
+        Span& operator=(const Span& other);
+        ~Span();
 
         void addNumber(int number);
 
