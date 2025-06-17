@@ -74,6 +74,15 @@ void MutantStack<T>::testStack() const {
 
     std::cout << "\n***Stack elements iterate:\n" << std::endl;
 
+    std::cout << std::endl;
+    std::cout << std::endl;
+    
+    typename std::stack<T>::container_type::iterator it = s.begin();
+    typename std::stack<T>::container_type::iterator end = s.end();
+    for (; it != end; ++it) {
+        std::cout << *it << std::endl;
+    }
+
     std::stack<int>::container_type& cont = s.c; // Accessing the underlying container of the stack
     
     for (typename std::stack<T>::container_type::const_iterator it = cont.begin(); it != cont.end(); ++it) {
