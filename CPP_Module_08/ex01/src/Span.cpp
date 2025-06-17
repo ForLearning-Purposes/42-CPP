@@ -79,6 +79,8 @@ unsigned int Span::shortestSpan() const {
     int minSpan = std::numeric_limits<int>::max();
     for (size_t i = 0; i < sortedNumbers.size() - 1; ++i) {
         int span = sortedNumbers[i + 1] - sortedNumbers[i];
+        std::cout << "Span between " << sortedNumbers[i] << " and " << sortedNumbers[i + 1] 
+                  << ": " << span << std::endl;
         if (span < minSpan) {
             minSpan = span;
         }
