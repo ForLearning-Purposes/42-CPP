@@ -76,7 +76,7 @@ void MutantStack<T>::testStack() const {
 
     std::cout << std::endl;
     std::cout << std::endl;
-    
+    or the whole c
     typename std::stack<T>::container_type::iterator it = s.begin();
     typename std::stack<T>::container_type::iterator end = s.end();
     for (; it != end; ++it) {
