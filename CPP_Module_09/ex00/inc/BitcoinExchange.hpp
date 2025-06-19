@@ -7,6 +7,7 @@
 #include <map>
 #include <exception>
 #include <sstream>
+#include <stdexcept>
 
 class BitcoinExchange {
     public:
@@ -27,9 +28,9 @@ class BitcoinExchange {
         void validateFormat(const std::string &line) const;
         size_t validateSeparatorAndReturnPosition(const std::string &line) const;
         void validateDate(const std::string &date) const;
+        int leapYear(int year) const;
         void validateValue(const std::string &valueStr) const;
     
 };
-
 
 #endif
