@@ -32,6 +32,25 @@ int main(int ac, char **av) {
         std::cerr << "Exeption:\n\t" << e.what() << std::endl;
         return 1;
     }
-
+/*
+    std::map<std::string, int> testMap;
+    std::string key = "Monika";
+    testMap.insert(std::make_pair(key, 0));
+    testMap.insert(std::make_pair(key, 1));
+    testMap.insert(std::make_pair(key, 2));
+    testMap.insert(std::make_pair(key, 3));
+    testMap.insert(std::make_pair(key, 4));
+    testMap.insert(std::make_pair(key, 5));
+    //if the key already exists is it going to fail to insert or overwrite the value?
+    if (testMap.insert(std::make_pair(key, 6)).second) {
+        std::cout << "Inserted new value for 'Monika'." << std::endl;
+    } else {
+        std::cout << "Failed to insert new value for 'Monika', key already exists." << std::endl;
+    }
+    std::map<std::string, int>::iterator it = testMap.begin();
+    for (; it != testMap.end(); ++it) {
+        std::cout << "Key: " << it->first << ", Value: " << it->second << std::endl;
+    }
+*/
     return 0;
 }

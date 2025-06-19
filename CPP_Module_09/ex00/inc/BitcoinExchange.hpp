@@ -17,19 +17,20 @@ class BitcoinExchange {
         BitcoinExchange &operator=(const BitcoinExchange &other);
         ~BitcoinExchange();
 
-        std::map<std::string, float> getData() const;
+        std::map<std::string, double> getData() const;
         const std::string getFilename() const;
-
-    private:
+        
+        private:
         const std::string _filename;
-        std::map<std::string, float> _data;
+        std::map<std::string, double> _data;
+        std::map<std::string, double> _userInputData;
 
         void parseFile();
         void validateFormat(const std::string &line) const;
         size_t validateSeparatorAndReturnPosition(const std::string &line) const;
-        void validateDate(const std::string &date) const;
+        bool validateDate(const std::string &date) const;
         int leapYear(int year) const;
-        void validateValue(const std::string &valueStr) const;
+        bool validateValue(const std::string &valueStr) const;
     
 };
 

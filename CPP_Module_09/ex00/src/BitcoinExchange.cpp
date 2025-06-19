@@ -10,7 +10,7 @@ BitcoinExchange::~BitcoinExchange() {}
 //_________________________________________________________________________________________________________________
 
 // *** GETTERS ***
-std::map<std::string, float> BitcoinExchange::getData() const {
+std::map<std::string, double> BitcoinExchange::getData() const {
     return _data;
 }
 
@@ -43,35 +43,52 @@ void BitcoinExchange::validateFormat(const std::string &line) const {
 
     std::string date = line.substr(0, pos - 1);
     std::string valueStr = line.substr(pos + 2);
+
     
-    validateDate(date);
+    if (!validateDate(date) || !validateValue(valueStr)) {
+        std::cerr << "Error: bad input => " << line << std::endl;
+        return; // Skip this line if validation fails
+    } else {
+        std::stringstream ssValue(valueStr);
+        double value;
+        ssValue >> value;
+        if (ssValue.fail() || !ssValue.eof()) {
+            std::cerr << "Error: Invalid value format, expected a float: " << valueStr << std::endl;
+            return; // Skip this line if validation fails
+        }
+        // Here we can add the date and value to the map
+        //_userInputData.insert(std::make_pair("date", 0));
+        std::map<std::string, double> _userInput;
+        _userInput.insert(std::make_pair("date", 0));
+    }
 
-    std::cout << "<" << date << ">" << "_|_" << "<" << valueStr << ">" << std::endl;
+    //std::cout << "<" << date << ">" << "_|_" << "<" << valueStr << ">" << std::endl;
 
-    validateValue(valueStr);
+    //can ret bool to check if both date and value are valid to add them to the map
 }
 
 size_t BitcoinExchange::validateSeparatorAndReturnPosition(const std::string &line) const {
     size_t pos = line.find('|');
     if (pos == std::string::npos || pos == 0 || pos == line.length() - 1) {
-        throw std::runtime_error("Error: Invalid format, missing '|' or '|' first or last in line: " + line);
+        throw std::runtime_error("Error: bad input => " + line);
     }
     if (line.find('|', pos + 1) != std::string::npos) {
-        throw std::runtime_error("Error: Invalid format, multiple '|' in line: " + line);
+        throw std::runtime_error("Error: bad input => " + line);
     }
     
     // Check that there is a space before and after the separator
     std::size_t sepSpace = line.find(" | ");
     if (sepSpace == std::string::npos) {
-        throw std::runtime_error("Error: Invalid format, missing '[space]|[space]' in line: " + line);
+        throw std::runtime_error("Error: bad input => " + line);
     }
     return pos;
 }
 
 // FORMAT: "YYYY-MM-DD"
-void BitcoinExchange::validateDate(const std::string &date) const {
+bool BitcoinExchange::validateDate(const std::string &date) const {
     if (date.length() != 10 || date[4] != '-' || date[7] != '-') {
-        throw std::runtime_error("Error: Invalid date format, expected 'YYYY-MM-DD': " + date);
+        std::cerr << "Error: bad input => " << date << std::endl;
+        return false;
     }
 
     int yearPosition = 0;
@@ -80,17 +97,20 @@ void BitcoinExchange::validateDate(const std::string &date) const {
 
     for (; yearPosition < 4; ++yearPosition) {
         if (!isdigit(date[yearPosition])) {
-            throw std::runtime_error("Error: Invalid year in date: " + date);
+            std::cerr << "Error: bad input => " << date << std::endl;
+            return false;
         }
     }
     for (; monthPosition < 7; ++monthPosition) {
         if (!isdigit(date[monthPosition])) {
-            throw std::runtime_error("Error: Invalid month in date: " + date);
+            std::cerr << "Error: Invalid month in date: " << date << std::endl;
+            return false;
         }
     }
     for (; dayPosition < 10; ++dayPosition) {
         if (!isdigit(date[dayPosition])) {
-            throw std::runtime_error("Error: Invalid day in date: " + date);
+            std::cerr << "Error: Invalid day in date: " << date << std::endl;
+            return false;
         }
     }
 
@@ -99,10 +119,12 @@ void BitcoinExchange::validateDate(const std::string &date) const {
     std::string savedDay = date.substr(8, 2);
 
     if (savedYear < "2009" || savedYear > "2022") {
-        throw std::runtime_error("Error: Year out of range, expected between 2009 and 2022: " + savedYear);
+        std::cerr << "Error: Year out of range, expected between 2009 and 2022: " << savedYear << std::endl;
+        return false;
     }
     if (savedMonth < "01" || savedMonth > "12") {
-        throw std::runtime_error("Error: Month out of range, expected between 01 and 12: " + savedMonth);
+        std::cerr << "Error: Invalid month, expected between 01 and 12: " << savedMonth << std::endl;
+        return false;
     }
 
     // Check if the day is valid for the given month and year
@@ -113,23 +135,28 @@ void BitcoinExchange::validateDate(const std::string &date) const {
     switch (leapYear(year)) {
         case true:
             if (savedMonth == "02" && (savedDay < "01" || savedDay > "29")) {
-                throw std::runtime_error("Error: Invalid day for February in leap year: " + savedDay);
+                std::cerr << "Error: Invalid day for February in leap year: " << savedDay << std::endl;
+                return false;
             }
             break;
         case false:
             if (savedMonth == "02" && (savedDay < "01" || savedDay > "28")) {
-                throw std::runtime_error("Error: Invalid day for February in non-leap year: " + savedDay);
+                std::cerr << "Error: Invalid day for February in non-leap year: " << savedDay << std::endl;
+                return false;
             }
             break;
         default:
             break;
     }
     if ((savedMonth == "04" || savedMonth == "06" || savedMonth == "09" || savedMonth == "11") && (savedDay < "01" || savedDay > "30")) {
-        throw std::runtime_error("Error: Invalid day for month with 30 days: " + savedDay);
+        std::cerr << "Error: Invalid day for month with 30 days: " << savedDay << std::endl;
+        return false;
     }
     if ((savedMonth == "01" || savedMonth == "03" || savedMonth == "05" || savedMonth == "07" || savedMonth == "08" || savedDay == "10" || savedMonth == "12") && (savedDay < "01" || savedDay > "31")) {
-        throw std::runtime_error("Error: Invalid day for month with 31 days: " + savedDay);
+        std::cerr << "Error: Invalid day for month with 31 days: " << savedDay << std::endl;
+        return false;
     }
+    return true;
 }
 
 int BitcoinExchange::leapYear(int year) const {
@@ -137,18 +164,26 @@ int BitcoinExchange::leapYear(int year) const {
 }
 
 // FORMAT: "float" (e.g., "123.45")
-void BitcoinExchange::validateValue(const std::string &valueStr) const {
+bool BitcoinExchange::validateValue(const std::string &valueStr) const {
     //shoudl not have space
     if (valueStr.find(' ') != std::string::npos) {
-        throw std::runtime_error("Error: Invalid value format, spaces are not allowed: " + valueStr);
+        std::cerr << "Error: Invalid value format, spaces are not allowed: " << valueStr << std::endl;
+        return false;
     }
     std::stringstream ss(valueStr);
-    float value;
+    double value;
     ss >> value;
     if (ss.fail() || !ss.eof()) {
-        throw std::runtime_error("Error: Invalid value format, expected a float: " + valueStr);
+        std::cerr << "Error: Invalid value format, expected a float: " << valueStr << std::endl;
+        return false;
     }
-    if (value < 0 || value > 1000) {
-        throw std::runtime_error("Error: Value out of range, expected between 0 and 1000: " + valueStr);
+    if (value < 0) {
+        std::cerr << "Error: not a positive number." << std::endl;
+        return false;
     }
+    if (value > 1000) {
+        std::cerr << "Error: too large a number." << valueStr << std::endl;
+        return false;
+    }
+    return true;
 }
