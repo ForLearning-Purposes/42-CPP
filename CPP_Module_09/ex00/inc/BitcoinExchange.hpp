@@ -33,9 +33,6 @@ class BitcoinExchange {
         bool validateValue(const std::string &valueStr) const;
 
         void databaseParsing();
-
-        float getBitcoinPrice(const std::string &date);
-        std::string getClosestDate(const std::string &date) const;
 };
 
 #endif
