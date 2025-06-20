@@ -23,7 +23,6 @@ class BitcoinExchange {
         private:
         const std::string _filename;
         std::map<std::string, double> _data;
-        std::map<std::string, double> _userInputData;
 
         void parseFile();
         bool validateFormat(const std::string &line);
