@@ -21,8 +21,7 @@
 
 int main(int ac, char **av) {
     if (ac != 2) {
-        std::cerr << "Usage: " << av[0] << " <input_string>" << std::endl;
-        // maybe add some information about the expected input format and constraints
+        std::cerr << "Error: could not open file." << std::endl;
         return 1;
     }
 

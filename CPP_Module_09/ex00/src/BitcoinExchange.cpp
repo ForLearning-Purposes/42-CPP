@@ -2,6 +2,7 @@
 
 BitcoinExchange::BitcoinExchange() : _filename(""), _data() {}
 BitcoinExchange::BitcoinExchange(const std::string &filename) : _filename(filename), _data() {
+    //before parsing user input data, we need to parse the database of bitcoin values
     parseFile();
 }
 BitcoinExchange::BitcoinExchange(const BitcoinExchange &other) : _filename(other._filename), _data(other._data) {}
@@ -21,7 +22,6 @@ const std::string BitcoinExchange::getFilename() const {
 
 // *** PRIVATE METHODS ***
 void BitcoinExchange::parseFile() {
-    std::cout << "Parsing file: " << _filename << "\n\n" << std::endl;
 
     std::ifstream file(_filename.c_str());
     if (!file.is_open()) {
@@ -29,42 +29,47 @@ void BitcoinExchange::parseFile() {
     }
 
     std::string line;
+
+    std::getline(file, line);
+    if (line != "date | value")
+        throw std::runtime_error("Error: Invalid header line, expected 'date | value'");
+
     while (std::getline(file, line)) {
-        validateFormat(line);
+        if (validateFormat(line)) {
+            std::cout << (line.substr(0, 11 - 1)) << " => " << (line.substr(11 + 2)) << " = " << std::endl;
+        }
     }
     std::cout << std::endl;
+    
+    std::cout << "\n\n" << std::endl;
+    std::map<std::string, double>::iterator it = _userInputData.begin();
+    for (; it != _userInputData.end(); ++it) {
+        std::cout << "HERE: " << it->first << " | " << it->second << std::endl;
+    }
     file.close();
 }
 
-void BitcoinExchange::validateFormat(const std::string &line) const {
+bool BitcoinExchange::validateFormat(const std::string &line) {
     std::stringstream ss(line);
-
     size_t pos = validateSeparatorAndReturnPosition(line);
-
     std::string date = line.substr(0, pos - 1);
     std::string valueStr = line.substr(pos + 2);
 
-    
     if (!validateDate(date) || !validateValue(valueStr)) {
-        std::cerr << "Error: bad input => " << line << std::endl;
-        return; // Skip this line if validation fails
+        std::cerr << "Error: bad input => " << (line.substr(0, pos - 1)) << std::endl;
+        return false;
     } else {
         std::stringstream ssValue(valueStr);
         double value;
         ssValue >> value;
         if (ssValue.fail() || !ssValue.eof()) {
             std::cerr << "Error: Invalid value format, expected a float: " << valueStr << std::endl;
-            return; // Skip this line if validation fails
+            return false;
         }
-        // Here we can add the date and value to the map
-        //_userInputData.insert(std::make_pair("date", 0));
-        std::map<std::string, double> _userInput;
-        _userInput.insert(std::make_pair("date", 0));
+        _userInputData.insert(std::make_pair(date, value));
     }
-
     //std::cout << "<" << date << ">" << "_|_" << "<" << valueStr << ">" << std::endl;
-
-    //can ret bool to check if both date and value are valid to add them to the map
+    return true;
 }
 
 size_t BitcoinExchange::validateSeparatorAndReturnPosition(const std::string &line) const {
@@ -127,7 +132,6 @@ bool BitcoinExchange::validateDate(const std::string &date) const {
         return false;
     }
 
-    // Check if the day is valid for the given month and year
     std::stringstream ssYear(savedYear);
     int year;
     ssYear >> year;
