@@ -1,8 +1,10 @@
 #include "../inc/BitcoinExchange.hpp"
+#include <ostream>
 
 BitcoinExchange::BitcoinExchange() : _filename(""), _data() {}
 BitcoinExchange::BitcoinExchange(const std::string &filename) : _filename(filename), _data() {
     //before parsing user input data, we need to parse the database of bitcoin values
+    databaseParsing();
     parseFile();
 }
 BitcoinExchange::BitcoinExchange(const BitcoinExchange &other) : _filename(other._filename), _data(other._data) {}
@@ -21,6 +23,7 @@ const std::string BitcoinExchange::getFilename() const {
 //_________________________________________________________________________________________________________________
 
 // *** PRIVATE METHODS ***
+// *** FILE PARSING ***
 void BitcoinExchange::parseFile() {
 
     std::ifstream file(_filename.c_str());
@@ -34,17 +37,36 @@ void BitcoinExchange::parseFile() {
     if (line != "date | value")
         throw std::runtime_error("Error: Invalid header line, expected 'date | value'");
 
+//HERE
     while (std::getline(file, line)) {
         if (validateFormat(line)) {
-            std::cout << (line.substr(0, 11 - 1)) << " => " << (line.substr(11 + 2)) << " = " << std::endl;
+            std::string date = line.substr(0, 11 - 1);
+            std::string valueStr = line.substr(11 + 2);
+
+            std::stringstream ssValue(valueStr);
+            float value;
+            ssValue >> value;
+            if (ssValue.fail() || !ssValue.eof()) {
+                std::cerr << "Error: Invalid value format, expected a float: " << valueStr << std::endl;
+                continue;
+            }
+
+            std::map<std::string, double>::iterator it = _data.begin();
+            std::string closestDate;
+            float exchangeRate = 0.0;
+            for (; it != _data.end(); ++it) {
+                if (date == it->first) {
+                    std::cout << "Same date found! UserDate: |" << date << "| Database: |" << it->first << "|" << std::endl;
+                } else {
+                    std::map<std::string, double>::iterator lowerBound = _data.lower_bound(date);
+                    closestDate = (lowerBound == _data.begin()) ? lowerBound->first : (--lowerBound)->first;
+                    exchangeRate = _data[closestDate];
+                    break;
+                }
+            }
+            std::cout << (line.substr(0, 11 - 1)) << " => " << (line.substr(11 + 2)) << " = " <<
+            (value * exchangeRate) << std::endl;
         }
-    }
-    std::cout << std::endl;
-    
-    std::cout << "\n\n" << std::endl;
-    std::map<std::string, double>::iterator it = _userInputData.begin();
-    for (; it != _userInputData.end(); ++it) {
-        std::cout << "HERE: " << it->first << " | " << it->second << std::endl;
     }
     file.close();
 }
@@ -52,7 +74,7 @@ void BitcoinExchange::parseFile() {
 bool BitcoinExchange::validateFormat(const std::string &line) {
     std::stringstream ss(line);
     if (!validateSeparatorAndReturnPosition(line)) {
-        std::cerr << "Error: bad input 1 => " << line << std::endl;
+        std::cerr << "Error: bad input => " << line << std::endl;
         return false;
     }
     size_t pos = line.find('|');
@@ -61,15 +83,6 @@ bool BitcoinExchange::validateFormat(const std::string &line) {
 
     if (!validateDate(date) || !validateValue(valueStr)) {
         return false;
-    } else {
-        std::stringstream ssValue(valueStr);
-        double value;
-        ssValue >> value;
-        if (ssValue.fail() || !ssValue.eof()) {
-            std::cerr << "Error: Invalid value format, expected a float: " << valueStr << std::endl;
-            return false;
-        }
-        _userInputData.insert(std::make_pair(date, value));
     }
     //std::cout << "<" << date << ">" << "_|_" << "<" << valueStr << ">" << std::endl;
     return true;
@@ -173,7 +186,7 @@ bool BitcoinExchange::validateValue(const std::string &valueStr) const {
         return false;
     }
     std::stringstream ss(valueStr);
-    double value;
+    float value;
     ss >> value;
     if (ss.fail() || !ss.eof()) {
         std::cerr << "Error: Invalid value format, expected a float: " << valueStr << std::endl;
@@ -188,4 +201,35 @@ bool BitcoinExchange::validateValue(const std::string &valueStr) const {
         return false;
     }
     return true;
+}
+
+// *** DATABASE PARSING ***
+void BitcoinExchange::databaseParsing() {
+    std::ifstream databaseFile("database/data.csv");
+    if (!databaseFile.is_open()) {
+        throw std::runtime_error("Error: Could not open database file.");
+    }
+    std::string line;
+    std::getline(databaseFile, line);
+    if (line != "date,exchange_rate") {
+        throw std::runtime_error("Error: Invalid header line in database file, expected 'date, value'");
+    }
+    while (std::getline(databaseFile, line)){
+        size_t pos = line.find(',');
+        if (pos == std::string::npos) {
+            std::cerr << "Error: Invalid line format in database file: " << line << std::endl;
+            continue;
+        } else {
+            std::string data = line.substr(0, pos);
+            std::string valueStr = line.substr(pos + 1);
+            std::stringstream ssValue(valueStr);
+            float value;
+            ssValue >> value;
+            if (ssValue.fail() || !ssValue.eof()) {
+                throw std::runtime_error("Error: Invalid value format in database file, expected a double: " + valueStr);
+            }
+            _data.insert(std::make_pair(data, value));
+        }
+    }
+    databaseFile.clear();
 }
