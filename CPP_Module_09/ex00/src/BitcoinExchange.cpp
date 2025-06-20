@@ -51,12 +51,15 @@ void BitcoinExchange::parseFile() {
 
 bool BitcoinExchange::validateFormat(const std::string &line) {
     std::stringstream ss(line);
-    size_t pos = validateSeparatorAndReturnPosition(line);
+    if (!validateSeparatorAndReturnPosition(line)) {
+        std::cerr << "Error: bad input 1 => " << line << std::endl;
+        return false;
+    }
+    size_t pos = line.find('|');
     std::string date = line.substr(0, pos - 1);
     std::string valueStr = line.substr(pos + 2);
 
     if (!validateDate(date) || !validateValue(valueStr)) {
-        std::cerr << "Error: bad input => " << (line.substr(0, pos - 1)) << std::endl;
         return false;
     } else {
         std::stringstream ssValue(valueStr);
@@ -72,27 +75,22 @@ bool BitcoinExchange::validateFormat(const std::string &line) {
     return true;
 }
 
-size_t BitcoinExchange::validateSeparatorAndReturnPosition(const std::string &line) const {
+bool BitcoinExchange::validateSeparatorAndReturnPosition(const std::string &line) const {
     size_t pos = line.find('|');
-    if (pos == std::string::npos || pos == 0 || pos == line.length() - 1) {
-        throw std::runtime_error("Error: bad input => " + line);
-    }
-    if (line.find('|', pos + 1) != std::string::npos) {
-        throw std::runtime_error("Error: bad input => " + line);
-    }
-    
-    // Check that there is a space before and after the separator
+    if (pos == std::string::npos || pos == 0 || pos == line.length() - 1)
+        return false;
+    if (line.find('|', pos + 1) != std::string::npos)
+        return false;
     std::size_t sepSpace = line.find(" | ");
-    if (sepSpace == std::string::npos) {
-        throw std::runtime_error("Error: bad input => " + line);
-    }
-    return pos;
+    if (sepSpace == std::string::npos)
+        return false;
+    return true;
 }
 
 // FORMAT: "YYYY-MM-DD"
 bool BitcoinExchange::validateDate(const std::string &date) const {
     if (date.length() != 10 || date[4] != '-' || date[7] != '-') {
-        std::cerr << "Error: bad input => " << date << std::endl;
+        std::cerr << "Error: bad input 35 => " << date << std::endl;
         return false;
     }
 
@@ -102,7 +100,7 @@ bool BitcoinExchange::validateDate(const std::string &date) const {
 
     for (; yearPosition < 4; ++yearPosition) {
         if (!isdigit(date[yearPosition])) {
-            std::cerr << "Error: bad input => " << date << std::endl;
+            std::cerr << "Error: bad input 52 => " << date << std::endl;
             return false;
         }
     }
@@ -186,7 +184,7 @@ bool BitcoinExchange::validateValue(const std::string &valueStr) const {
         return false;
     }
     if (value > 1000) {
-        std::cerr << "Error: too large a number." << valueStr << std::endl;
+        std::cerr << "Error: too large a number." << std::endl;
         return false;
     }
     return true;

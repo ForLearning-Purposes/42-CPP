@@ -27,7 +27,7 @@ class BitcoinExchange {
 
         void parseFile();
         bool validateFormat(const std::string &line);
-        size_t validateSeparatorAndReturnPosition(const std::string &line) const;
+        bool validateSeparatorAndReturnPosition(const std::string &line) const;
         bool validateDate(const std::string &date) const;
         int leapYear(int year) const;
         bool validateValue(const std::string &valueStr) const;
