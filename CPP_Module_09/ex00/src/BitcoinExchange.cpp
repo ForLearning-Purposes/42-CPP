@@ -54,18 +54,23 @@ void BitcoinExchange::parseFile() {
             std::map<std::string, double>::iterator it = _data.begin();
             std::string closestDate;
             float exchangeRate = 0.0;
+            bool found = false;
             for (; it != _data.end(); ++it) {
-                if (date == it->first) {
-                    std::cout << "Same date found! UserDate: |" << date << "| Database: |" << it->first << "|" << std::endl;
-                } else {
-                    std::map<std::string, double>::iterator lowerBound = _data.lower_bound(date);
-                    closestDate = (lowerBound == _data.begin()) ? lowerBound->first : (--lowerBound)->first;
-                    exchangeRate = _data[closestDate];
+                if (it->first == date) {
+                    found = true;
                     break;
                 }
             }
+            if (found == true) {
+                exchangeRate = it->second;
+            } else {
+                std::map<std::string, double>::iterator lowerBound = _data.lower_bound(date);
+                closestDate = (lowerBound == _data.begin()) ? lowerBound->first : (--lowerBound)->first;
+                exchangeRate = _data[closestDate];
+            }
             std::cout << (line.substr(0, 11 - 1)) << " => " << (line.substr(11 + 2)) << " = " <<
             (value * exchangeRate) << std::endl;
+            //std::cout << value << " * " << exchangeRate << " = " << (value * exchangeRate) << std::endl;
         }
     }
     file.close();
