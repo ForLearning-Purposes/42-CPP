@@ -20,7 +20,7 @@ class BitcoinExchange {
         std::map<std::string, double> getData() const;
         const std::string getFilename() const;
         
-        private:
+    private:
         const std::string _filename;
         std::map<std::string, double> _data;
 
