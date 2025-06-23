@@ -15,7 +15,7 @@ class RPN {
         RPN &operator=(const RPN &rhs);
         ~RPN();
 
-        void validateExpression(const std::string &expression);
+        void validateExpression(std::string expression);
     private:
 };
 
