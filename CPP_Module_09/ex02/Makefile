@@ -2,7 +2,7 @@
 
 # Specific variables
 SRCS = src/main.cpp
-TARGET = pmergeMe
+TARGET = PmergeMe
 
 # Include common rules and variables
 include ../common.mk
