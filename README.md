@@ -104,11 +104,12 @@
     #### uintptr_t
     - It's an unsigned integer type that is guaranteed to be able to hold a pointer.
     - You’re using this to demonstrate that you can safely "store" a pointer as a number and retrieve it back.
-
+---
 ### Module 07
 - templates
     #### Templates
     -
+---
 ### Module 08
 - Templated containers, iterators, algorithms
 - This module is designed to teach you how to rely heavily on STL containers and algorithms instead of writing everything from scratch.
@@ -120,3 +121,6 @@
     | Writing your own sort function   | Use `std::sort()`          |
     | Manual loop to find a value      | Use `std::find()`          |
     | Manually counting elements       | Use `std::count_if()`      |
+---
+### Module 09
+- STL
