@@ -1,4 +1,6 @@
 #include <iostream>
+#include "../inc/PmergeMe.hpp"
+
 
 /*
 You must use at least two different containers in your code to
@@ -22,13 +24,13 @@ sequence
 */
 
 int main(int ac, char **av) {
-    (void) av;
-    if (ac < 3) {
-        std::cerr << "Usage: ./PmergeMe <number> <number> ..." << std::endl;
+    (void)av;
+    if (ac < 2) {
+        std::cerr << "ERROR\nUsage: ./prog num1 num2 num3 ..." << std::endl;
         return 1;
     }
-
-    return 0;
+    PmergeMe fordJohnson;
+    fordJohnson.parseArgs(ac, av);
 }
 
 /*
