@@ -11,12 +11,16 @@ class DataParsing {
     public:
         void parseArgs(int ac, char **av);
         bool isPoitive(const std::string& s);
-        void printContainers() const;
+        void printContainers();
+
+        //GETTERS & SETTERS
         std::vector<int> getVecor() const;
         std::deque<int> getDeque() const;
+        void setVecor(int num);
+        void setDeque(int num);
     protected:
-        std::vector<int> vec;
-        std::deque<int> dq;
+        std::vector<int> _vec;
+        std::deque<int> _dq;
 };
 
 #endif

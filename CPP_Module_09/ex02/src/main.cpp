@@ -29,8 +29,8 @@ int main(int ac, char **av) {
         std::cerr << "ERROR\nUsage: ./prog num1 num2 num3 ..." << std::endl;
         return 1;
     }
-    PmergeMe fordJohnson;
-    fordJohnson.parseArgs(ac, av);
+    PmergeMe fordJohnsonAlgorithm;
+    fordJohnsonAlgorithm.parseArgs(ac, av);
 }
 
 /*

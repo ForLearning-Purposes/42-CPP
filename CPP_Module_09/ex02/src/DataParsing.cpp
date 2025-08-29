@@ -1,8 +1,28 @@
 #include "../inc/DataParsing.hpp"
 
+/*
+***** GETTERS & SETTERS
+*/
+
 std::vector<int> DataParsing::getVecor() const {
-    return this->vec;
+    return this->_vec;
 }
+
+std::deque<int> DataParsing::getDeque() const {
+    return this->_dq;
+}
+
+void DataParsing::setVecor(int num) {
+    _vec.push_back(num);
+}
+
+void DataParsing::setDeque(int num) {
+    _dq.push_back(num);
+}
+
+/*
+***************************************************
+*/
 
 bool DataParsing::isPoitive(const std::string& s) {
     if (s.empty()) return false;
@@ -23,14 +43,20 @@ void DataParsing::parseArgs(int ac, char **av){
             std::cout << "Error" << std::endl;
             exit(1);
         }
-        vec.push_back(num);
-        dq.push_back(num);
+        _vec.push_back(num);
+        _dq.push_back(num);
     }
+    std::cout << "***BEFORE***\n" << std::endl;
     printContainers();
 }
 
-void DataParsing::printContainers() const {
-    std::cout << "***BEFORE***" << std::endl;
-    std::cout << "Vector:\t" << std::endl;
-    std::cout << "Deque:\t" << std::endl;
+void DataParsing::printContainers() {
+    std::cout << "Vector:\t";
+    for (std::vector<int>::iterator it = _vec.begin(); it != _vec.end(); it++)
+        std::cout << *it << " ";
+    std::cout << std::endl;
+    std::cout << "Deque:\t";
+    for (std::deque<int>::iterator it = _dq.begin(); it != _dq.end(); it++)
+        std::cout << *it << " ";
+    std::cout << "\n" << std::endl;
 }

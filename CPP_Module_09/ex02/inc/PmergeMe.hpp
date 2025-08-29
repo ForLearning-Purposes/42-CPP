@@ -10,10 +10,8 @@
 
 class PmergeMe : public DataParsing {
     public:
-        std::vector<int> getVec() const;
-        std::deque<int> getDq() const;
-        void setVec(std::vector<int>);
-        void setDq(std::deque<int>);
+        void sortVector();
+        void sortDeque();
 };
 
 #endif
