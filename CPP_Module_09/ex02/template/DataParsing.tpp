@@ -1,22 +1,42 @@
+#ifndef DATAPARSING_TPP
+#define DATAPARSING_TPP
+
+
 #include "../inc/DataParsing.hpp"
+
+template <typename Container>
+DataParsing<Container>::DataParsing(){
+    std::cout << "**DataParsing (perent) Constructor - no args**" << std::endl;
+    //need to handle parsing
+}
+
+template <typename Container>
+DataParsing<Container>::DataParsing(int ac, char **av){
+    std::cout << "**DataParsing (perent) Constructor - with args**" << std::endl;
+    parseArgs(ac, av);
+}
 
 /*
 ***** GETTERS & SETTERS
 */
 
-std::vector<int> DataParsing::getVecor() const {
+template <typename Container>
+std::vector<int> DataParsing<Container>::getVecor() const {
     return this->_vec;
 }
 
-std::deque<int> DataParsing::getDeque() const {
+template <typename Container>
+std::deque<int> DataParsing<Container>::getDeque() const {
     return this->_dq;
 }
 
-void DataParsing::setVecor(int num) {
+template <typename Container>
+void DataParsing<Container>::setVecor(int num) {
     _vec.push_back(num);
 }
 
-void DataParsing::setDeque(int num) {
+template <typename Container>
+void DataParsing<Container>::setDeque(int num) {
     _dq.push_back(num);
 }
 
@@ -24,14 +44,16 @@ void DataParsing::setDeque(int num) {
 ***************************************************
 */
 
-bool DataParsing::isPoitive(const std::string& s) {
+template <typename Container>
+bool DataParsing<Container>::isPoitive(const std::string& s) {
     if (s.empty()) return false;
     for (int i = 0; s[i] != '\0'; i++)
         if (!isdigit(s[i])) return false;
     return true;
 }
 
-void DataParsing::parseArgs(int ac, char **av){
+template <typename Container>
+void DataParsing<Container>::parseArgs(int ac, char **av){
     for (int i = 1; i < ac; i++){
         std::string str = av[i];
         if (!isPoitive(av[i])){
@@ -45,12 +67,14 @@ void DataParsing::parseArgs(int ac, char **av){
         }
         _vec.push_back(num);
         _dq.push_back(num);
+        container.push_back(num);
     }
     std::cout << "***BEFORE***\n" << std::endl;
     printContainers();
 }
 
-void DataParsing::printContainers() {
+template <typename Container>
+void DataParsing<Container>::printContainers() {
     std::cout << "Vector:\t";
     for (std::vector<int>::iterator it = _vec.begin(); it != _vec.end(); it++)
         std::cout << *it << " ";
@@ -60,3 +84,5 @@ void DataParsing::printContainers() {
         std::cout << *it << " ";
     std::cout << "\n" << std::endl;
 }
+
+#endif

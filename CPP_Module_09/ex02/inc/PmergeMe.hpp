@@ -1,5 +1,5 @@
-#ifndef PMERGEME
-#define PMERGEME
+#ifndef PMERGEME_HPP
+#define PMERGEME_HPP
 
 // use deque and vector (template to use both)
 #include <iostream>
@@ -8,10 +8,30 @@
 #include <cstdlib>
 #include "DataParsing.hpp"
 
-class PmergeMe : public DataParsing {
+template <typename Container>
+class PmergeMe : public DataParsing<Container> {
+
+    
     public:
-        void sortVector();
-        void sortDeque();
+        Container container; //inspired my gh
+        PmergeMe();
+        PmergeMe(int ac, char **av);
+        PmergeMe(const PmergeMe<Container>& other);
+        PmergeMe<Container>& operator=(const PmergeMe<Container>& other);
+        ~PmergeMe();
+
+        //_____________________________________________________________________
+
+        //typedef typename T::iterator iterator; //check how to use module 08
+
+        //_____________________________________________________________________
+
+
 };
+
+template <typename Container>
+std::ostream& operator<<(std::ostream& os, const PmergeMe<Container>& PmergeMe);
+
+#include "../template/PmergeMe.tpp"
 
 #endif

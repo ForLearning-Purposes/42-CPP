@@ -29,8 +29,14 @@ int main(int ac, char **av) {
         std::cerr << "ERROR\nUsage: ./prog num1 num2 num3 ..." << std::endl;
         return 1;
     }
-    PmergeMe fordJohnsonAlgorithm;
-    fordJohnsonAlgorithm.parseArgs(ac, av);
+    try {
+        PmergeMe<std::vector<int> > Vector(ac, av);
+        //PmergeMe<std::deque<int>> Deque(ac, av);
+    } catch (...) {
+        std::cerr << "Error" << std::endl;
+        return 1;
+    }
+    return 0;
 }
 
 /*
