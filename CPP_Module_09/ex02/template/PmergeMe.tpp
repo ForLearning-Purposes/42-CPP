@@ -14,6 +14,7 @@ PmergeMe<Container>::PmergeMe() : DataParsing<Container>() {
 template <typename Container>
 PmergeMe<Container>::PmergeMe(int ac, char **av) : DataParsing<Container>(ac, av) {
     std::cout << "**PmergeMe (child) Constructor - with args**" << std::endl;
+    sort();
 }
 
 template <typename Container>
@@ -40,5 +41,10 @@ std::ostream& operator<<(std::ostream& os, const PmergeMe<Container>& PmergeMe) 
 
 //_________________________________________________________________________________________
 
+
+template <typename Container>
+void PmergeMe<Container>::sort() {
+    std::cout << "hmmm.... " << this->_container[0] << std::endl;
+}
 
 #endif

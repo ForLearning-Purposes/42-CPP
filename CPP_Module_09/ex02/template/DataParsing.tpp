@@ -31,6 +31,11 @@ std::deque<int> DataParsing<Container>::getDeque() const {
 }
 
 template <typename Container>
+Container DataParsing<Container>::getContainer() const {
+    return this->_container;
+}
+
+template <typename Container>
 void DataParsing<Container>::setVecor(int num) {
     _vec.push_back(num);
 }
@@ -38,6 +43,11 @@ void DataParsing<Container>::setVecor(int num) {
 template <typename Container>
 void DataParsing<Container>::setDeque(int num) {
     _dq.push_back(num);
+}
+
+template <typename Container>
+void DataParsing<Container>::setContainer(int num) {
+    _container.push_back(num);
 }
 
 /*
@@ -67,7 +77,7 @@ void DataParsing<Container>::parseArgs(int ac, char **av){
         }
         _vec.push_back(num);
         _dq.push_back(num);
-        container.push_back(num);
+        _container.push_back(num);
     }
     std::cout << "***BEFORE***\n" << std::endl;
     printContainers();
@@ -75,12 +85,8 @@ void DataParsing<Container>::parseArgs(int ac, char **av){
 
 template <typename Container>
 void DataParsing<Container>::printContainers() {
-    std::cout << "Vector:\t";
-    for (std::vector<int>::iterator it = _vec.begin(); it != _vec.end(); it++)
-        std::cout << *it << " ";
-    std::cout << std::endl;
-    std::cout << "Deque:\t";
-    for (std::deque<int>::iterator it = _dq.begin(); it != _dq.end(); it++)
+    std::cout << "Container:\t";
+    for (typename Container::iterator it = _container.begin(); it != _container.end(); it++)
         std::cout << *it << " ";
     std::cout << "\n" << std::endl;
 }

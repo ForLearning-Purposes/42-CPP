@@ -13,7 +13,7 @@ class PmergeMe : public DataParsing<Container> {
 
     
     public:
-        Container container; //inspired my gh
+        //Container container; //inspired my gh
         PmergeMe();
         PmergeMe(int ac, char **av);
         PmergeMe(const PmergeMe<Container>& other);
@@ -22,10 +22,11 @@ class PmergeMe : public DataParsing<Container> {
 
         //_____________________________________________________________________
 
-        //typedef typename T::iterator iterator; //check how to use module 08
+        
 
         //_____________________________________________________________________
-
+        
+        void sort();
 
 };
 
