@@ -1,12 +1,12 @@
 #ifndef PMERGEME_HPP
-#define PMERGEME_HPP
+# define PMERGEME_HPP
 
 // use deque and vector (template to use both)
-#include <iostream>
-#include <vector>
-#include <deque>
-#include <cstdlib>
-#include "DataParsing.hpp"
+# include <iostream>
+# include <vector>
+# include <deque>
+# include <cstdlib>
+# include "DataParsing.hpp"
 
 template <typename Container>
 class PmergeMe : public DataParsing<Container> {
@@ -33,6 +33,6 @@ class PmergeMe : public DataParsing<Container> {
 template <typename Container>
 std::ostream& operator<<(std::ostream& os, const PmergeMe<Container>& PmergeMe);
 
-#include "../template/PmergeMe.tpp"
+# include "../template/PmergeMe.tpp"
 
 #endif

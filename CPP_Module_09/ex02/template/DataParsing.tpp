@@ -1,7 +1,6 @@
 #ifndef DATAPARSING_TPP
 #define DATAPARSING_TPP
 
-
 #include "../inc/DataParsing.hpp"
 
 template <typename Container>
