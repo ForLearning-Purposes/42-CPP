@@ -14,7 +14,6 @@ class DataParsing {
         DataParsing(int ac, char **av);
         void parseArgs(int ac, char **av);
         bool isPoitive(const std::string& s);
-        void printContainers();
 
         //GETTERS & SETTERS
         std::vector<int> getVecor() const;

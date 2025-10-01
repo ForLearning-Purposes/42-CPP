@@ -6,6 +6,11 @@
 # include <vector>
 # include <deque>
 # include <cstdlib>
+# include <ctime>
+# include <cmath>
+# include <algorithm>
+# include <stdexcept>
+# include <typeinfo>
 # include "DataParsing.hpp"
 
 template <typename Container>
@@ -22,11 +27,19 @@ class PmergeMe : public DataParsing<Container> {
 
         //_____________________________________________________________________
 
+        typedef typename Container::iterator Iterator;
         
 
         //_____________________________________________________________________
-        
+
+        void printContainers();
         void sort();
+
+    private:
+        void recursiveSort(Container &cont, int block_of_elements);
+        int Jacobsthal(int n);
+        void insertWithJacobsthal(Container &main, Container &pend, int odd, Container &leftover, Container &cont, bool is_odd, int block_of_elements);
+        std::string container_type();
 
 };
 

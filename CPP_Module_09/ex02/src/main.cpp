@@ -31,7 +31,7 @@ int main(int ac, char **av) {
     }
     try {
         PmergeMe<std::vector<int> > Vector(ac, av);
-        //PmergeMe<std::deque<int>> Deque(ac, av);
+        PmergeMe<std::deque<int> > Deque(ac, av);
     } catch (...) {
         std::cerr << "Error" << std::endl;
         return 1;

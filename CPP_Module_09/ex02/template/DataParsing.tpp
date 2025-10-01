@@ -5,13 +5,10 @@
 
 template <typename Container>
 DataParsing<Container>::DataParsing(){
-    std::cout << "**DataParsing (perent) Constructor - no args**" << std::endl;
-    //need to handle parsing
 }
 
 template <typename Container>
 DataParsing<Container>::DataParsing(int ac, char **av){
-    std::cout << "**DataParsing (perent) Constructor - with args**" << std::endl;
     parseArgs(ac, av);
 }
 
@@ -78,16 +75,9 @@ void DataParsing<Container>::parseArgs(int ac, char **av){
         _dq.push_back(num);
         _container.push_back(num);
     }
-    std::cout << "***BEFORE***\n" << std::endl;
-    printContainers();
+    // std::cout << "\n**BEFORE:" << std::endl;
+    // printContainers();
 }
 
-template <typename Container>
-void DataParsing<Container>::printContainers() {
-    std::cout << "Container:\t";
-    for (typename Container::iterator it = _container.begin(); it != _container.end(); it++)
-        std::cout << *it << " ";
-    std::cout << "\n" << std::endl;
-}
 
 #endif
