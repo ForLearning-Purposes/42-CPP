@@ -34,9 +34,9 @@ const std::string BitcoinExchange::getFilename() const {
     return _filename;
 }
 //_________________________________________________________________________________________________________________
-
 // *** PRIVATE METHODS ***
 // *** FILE PARSING ***
+
 void BitcoinExchange::parseFile() {
 
     std::ifstream file(_filename.c_str());

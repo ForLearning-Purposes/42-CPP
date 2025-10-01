@@ -20,6 +20,15 @@
 // }
 
 int main(int ac, char **av) {
+
+    //test copy constructor and assignment operator
+    // {
+    //     BitcoinExchange exchange("something.txt");
+    //     BitcoinExchange copyExchange = exchange;
+    //     BitcoinExchange assignedExchange;
+    //     assignedExchange = exchange;
+    // }
+
     if (ac != 2) {
         std::cerr << "Error: could not open file." << std::endl;
         return 1;

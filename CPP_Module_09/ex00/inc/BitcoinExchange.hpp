@@ -30,7 +30,6 @@ class BitcoinExchange {
         bool validateDate(const std::string &date) const;
         int leapYear(int year) const;
         bool validateValue(const std::string &valueStr) const;
-
         void databaseParsing();
 };
 
