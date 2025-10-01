@@ -33,45 +33,47 @@ void BitcoinExchange::parseFile() {
 
     std::string line;
 
-    std::getline(file, line);
-    if (line != "date | value")
-        throw std::runtime_error("Error: Invalid header line, expected 'date | value'");
+    if (!std::getline(file, line))
+        throw std::runtime_error("Error: File is empty or unreadable");
 
-//HERE
-    while (std::getline(file, line)) {
-        if (validateFormat(line)) {
-            std::string date = line.substr(0, 11 - 1);
-            std::string valueStr = line.substr(11 + 2);
-
-            std::stringstream ssValue(valueStr);
-            float value;
-            ssValue >> value;
-            if (ssValue.fail() || !ssValue.eof()) {
-                std::cerr << "Error: Invalid value format, expected a float: " << valueStr << std::endl;
-                continue;
-            }
-
-            std::map<std::string, double>::iterator it = _data.begin();
-            std::string closestDate;
-            float exchangeRate = 0.0;
-            bool found = false;
-            for (; it != _data.end(); ++it) {
-                if (it->first == date) {
-                    found = true;
-                    break;
+    if (line == "date | value") {
+        while (std::getline(file, line)) {
+            if (validateFormat(line)) {
+                std::string date = line.substr(0, 11 - 1);
+                std::string valueStr = line.substr(11 + 2);
+    
+                std::stringstream ssValue(valueStr);
+                float value;
+                ssValue >> value;
+                if (ssValue.fail() || !ssValue.eof()) {
+                    std::cerr << "Error: Invalid value format, expected a float: " << valueStr << std::endl;
+                    continue;
                 }
+    
+                std::map<std::string, double>::iterator it = _data.begin();
+                std::string closestDate;
+                float exchangeRate = 0.0;
+                bool found = false;
+                for (; it != _data.end(); ++it) {
+                    if (it->first == date) {
+                        found = true;
+                        break;
+                    }
+                }
+                if (found == true) {
+                    exchangeRate = it->second;
+                } else {
+                    std::map<std::string, double>::iterator lowerBound = _data.lower_bound(date);
+                    closestDate = (lowerBound == _data.begin()) ? lowerBound->first : (--lowerBound)->first;
+                    exchangeRate = _data[closestDate];
+                }
+                std::cout << (line.substr(0, 11 - 1)) << " => " << (line.substr(11 + 2)) << " = " <<
+                (value * exchangeRate) << std::endl;
+                //std::cout << value << " * " << exchangeRate << " = " << (value * exchangeRate) << std::endl;
             }
-            if (found == true) {
-                exchangeRate = it->second;
-            } else {
-                std::map<std::string, double>::iterator lowerBound = _data.lower_bound(date);
-                closestDate = (lowerBound == _data.begin()) ? lowerBound->first : (--lowerBound)->first;
-                exchangeRate = _data[closestDate];
-            }
-            std::cout << (line.substr(0, 11 - 1)) << " => " << (line.substr(11 + 2)) << " = " <<
-            (value * exchangeRate) << std::endl;
-            //std::cout << value << " * " << exchangeRate << " = " << (value * exchangeRate) << std::endl;
         }
+    } else {
+        throw std::runtime_error("Error: Invalid header line, expected 'date | value'");
     }
     file.close();
 }
