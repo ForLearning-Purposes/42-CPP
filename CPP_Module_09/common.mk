@@ -2,7 +2,7 @@
 
 # Variables
 CXX = c++
-CXXFLAGS = -Wall -Wextra -Werror -g -std=c++98
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 OBJDIR = bin
 OBJS = $(patsubst %.cpp,$(OBJDIR)/%.o,$(SRCS))
 DEP = $(OBJS:%.o=%.d)
