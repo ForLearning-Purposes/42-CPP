@@ -21,7 +21,7 @@ class BitcoinExchange {
         const std::string getFilename() const;
         
     private:
-        const std::string _filename;
+        std::string _filename;
         std::map<std::string, double> _data;
 
         void parseFile();

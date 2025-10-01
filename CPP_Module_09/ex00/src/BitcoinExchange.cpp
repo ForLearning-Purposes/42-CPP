@@ -2,16 +2,29 @@
 #include <ostream>
 
 BitcoinExchange::BitcoinExchange() : _filename(""), _data() {}
+
 BitcoinExchange::BitcoinExchange(const std::string &filename) : _filename(filename), _data() {
-    //before parsing user input data, we need to parse the database of bitcoin values
     databaseParsing();
     parseFile();
 }
-BitcoinExchange::BitcoinExchange(const BitcoinExchange &other) : _filename(other._filename), _data(other._data) {}
-BitcoinExchange &BitcoinExchange::operator=(const BitcoinExchange &other) { (void)other; return *this; }
-BitcoinExchange::~BitcoinExchange() {}
-//_________________________________________________________________________________________________________________
 
+BitcoinExchange::BitcoinExchange(const BitcoinExchange &other) {
+    *this = other;
+}
+
+BitcoinExchange &BitcoinExchange::operator=(const BitcoinExchange &other) {
+    if (this != &other) {
+        _filename = other._filename;
+        _data = other._data;
+    }
+    return *this;
+}
+
+
+
+BitcoinExchange::~BitcoinExchange() {}
+
+//_________________________________________________________________________________________________________________
 // *** GETTERS ***
 std::map<std::string, double> BitcoinExchange::getData() const {
     return _data;

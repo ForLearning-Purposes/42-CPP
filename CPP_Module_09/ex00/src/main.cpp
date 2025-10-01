@@ -24,13 +24,19 @@ int main(int ac, char **av) {
         std::cerr << "Error: could not open file." << std::endl;
         return 1;
     }
-
     try {
         BitcoinExchange exchange(av[1]);
     } catch (const std::exception &e) {
         std::cerr << "Exeption:\n\t" << e.what() << std::endl;
         return 1;
     }
+    return 0;
+}
+
+
+
+
+
 /*
     std::map<std::string, int> testMap;
     std::string key = "Monika";
@@ -51,5 +57,3 @@ int main(int ac, char **av) {
         std::cout << "Key: " << it->first << ", Value: " << it->second << std::endl;
     }
 */
-    return 0;
-}
