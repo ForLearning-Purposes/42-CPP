@@ -16,7 +16,7 @@ class RPN {
         ~RPN();
         void start(std::string expression);
     private:
-        std::list<int> stack;
+        std::list<int> lst;
 
         bool validateExpression(const std::string &expression);
         int calculate(const std::string &input);

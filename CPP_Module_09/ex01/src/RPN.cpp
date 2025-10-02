@@ -23,7 +23,6 @@ bool RPN::isOperator(const std::string &token) {
     return token == "+" || token == "-" || token == "*" || token == "/";
 }
 
-// Validate RPN structure using virtual stack depth
 bool RPN::validateExpression(const std::string &expression) {
     std::stringstream ss(expression);
     std::string token;
@@ -55,20 +54,19 @@ int RPN::applyOperator(int a, int b, const std::string &op) {
     throw std::runtime_error("Unknown operator");
 }
 
-// Evaluate expression using list as manual stack
 int RPN::calculate(const std::string &input) {
     std::stringstream ss(input);
     std::string token;
 
     while (ss >> token) {
         if (isDigit(token)) {
-            stack.push_back(token[0] - '0');
+            lst.push_back(token[0] - '0');
         } else if (isOperator(token)) {
-            int b = stack.back(); stack.pop_back();
-            int a = stack.back(); stack.pop_back();
+            int b = lst.back(); lst.pop_back();
+            int a = lst.back(); lst.pop_back();
             int result = applyOperator(a, b, token);
-            stack.push_back(result);
+            lst.push_back(result);
         }
     }
-    return stack.back();
+    return lst.back();
 }
