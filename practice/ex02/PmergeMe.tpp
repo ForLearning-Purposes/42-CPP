@@ -98,13 +98,23 @@ void PmergeMe<Container>::sort(){
 template <typename Container>
 void PmergeMe<Container>::sort(Container &vec) {
     static int order = 1;
-    if(order == 1)
-    start_ = clock(); //DOESN'T MATTER - JUST TIME
+    std::cout << "Order: " << order << std::endl;  //PRINT
+
+    if(order == 1) {
+        start_ = clock(); //DOESN'T MATTER - JUST TIME
+    }
+
     int unit_size = vec.size() / order;
-    if (unit_size < 2)
+    std::cout << "Unit size = " << unit_size << std::endl; //PRINT
+
+    if (unit_size < 2) {
+        std::cout << "***\tRETURN\t***\n" << std::endl; //PRINT
         return;
+    }
     
     bool is_odd = unit_size % 2 == 1;
+    std::cout << "Is odd: " << is_odd << std::endl; //PRINT
+
     Iterator start = vec.begin();
     Iterator end = vec.begin() + ((order * unit_size) - (is_odd * order));
     
