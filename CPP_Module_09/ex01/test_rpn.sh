@@ -9,13 +9,16 @@ NC='\033[0m'
 declare -a tests=(
     "1 2 + => 3"
     "5 1 2 + 4 * + 3 - => 14"
-    "3 + => Error"
-    "4 0 / => Error"
+    "3 + => Error: Invalid RPN expression"
+    "4 0 / => Error: Division by zero"
     "8 9 * 9 - 9 - 9 - 4 - 1 + => 42"
-    "1 2 3 + + + => Error"
-    "10 2 + => Error"   # 10 is not a single-digit
-    "a b + => Error"
+    "1 2 3 + + + => Error: Invalid RPN expression"
+    "10 2 + => Error: Invalid RPN expression"   # 10 is not a single-digit
+    "a b + => Error: Invalid RPN expression"
     "9 9 9 9 9 9 * * * * * => 531441"
+    "8 9 * 9 - 9 - 9 - 4 - 1 + => 42" # example form the subjet
+    "9 8 * 4 * 4 / 2 + 9 - 8 - 8 - 1 - 6 - => 42" # example form the subjet
+    "1 2 * 2 / 2 + 5 * 6 - 1 3 * - 4 5 * * 8 / => 15" # example form the subjet
 )
 
 pass=0
