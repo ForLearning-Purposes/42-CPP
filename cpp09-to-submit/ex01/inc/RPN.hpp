@@ -1,0 +1,33 @@
+#ifndef RPN_HPP
+#define RPN_HPP
+
+#include <iostream>
+#include <sstream>
+#include <list>
+#include <string>
+#include <cctype>
+#include <stdexcept>
+
+class RPN {
+    public:
+        RPN();
+        RPN(const RPN &other);
+        RPN &operator=(const RPN &other);
+        ~RPN();
+
+        //_____________________________________________________________________
+
+        void start(std::string expression);
+
+    private:
+        std::list<int> lst;
+
+        bool validateExpression(const std::string &expression);
+        int calculate(const std::string &input);
+        bool isOperator(const std::string &token);
+        bool isDigit(const std::string &token);
+        int applyOperator(int a, int b, const std::string &op);
+};
+
+
+#endif
